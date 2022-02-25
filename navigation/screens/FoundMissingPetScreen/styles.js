@@ -7,23 +7,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     paddingHorizontal: 30,
-    position: 'absolute',
-    top: '20%',
+    marginTop: 15,
   },
   background: {
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
-    justifyContent: 'center',
   },
   title: {
     fontSize: 30,
     fontFamily: 'notoserif',
     fontWeight: 'bold',
-    color: Colors.colors.theme,
-    position: 'absolute',
-    top: '10%',
-    left: '5%',
+    color: Colors.colors.dark,
+    marginTop: '15%',
+    marginHorizontal: '5%',
   },
   lostButton: {
     width: '40%',
@@ -37,12 +34,13 @@ const styles = StyleSheet.create({
     width: '40%',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 15,
+    paddingVertical: 10,
     backgroundColor: Colors.colors.dark,
     borderRadius: 15,
   },
   buttonText: {
     color: 'white',
+    fontSize: 18,
   }
 });
 
