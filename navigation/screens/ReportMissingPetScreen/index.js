@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -8,10 +8,32 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 
 import styles from "./styles";
 
 const ReportMissingPetScreen = ({ navigation }) => {
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to make this work!");
+        }
+      }
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+  };
+
   return (
     <SafeAreaView>
       <ScrollView style={styles.container}>
@@ -71,10 +93,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
             <TextInput style={styles.textInput} placeholder="e.g. yes/no" />
 
             <View style={styles.btnContainer}>
-              <TouchableOpacity
-                style={styles.button}
-                // onPress={onPress}
-              >
+              <TouchableOpacity style={styles.button} onPress={pickImage}>
                 <Text style={styles.btnText}>UPLOAD PET'S PHOTO</Text>
               </TouchableOpacity>
 
