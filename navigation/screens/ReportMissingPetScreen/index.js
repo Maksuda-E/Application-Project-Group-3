@@ -9,8 +9,21 @@ import {
   ScrollView,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { initializeApp } from "firebase/app"; //validate yourself
+import { getStorage, ref, uploadBytes } from "firebase/storage"; //access the storage database
 
 import styles from "./styles";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDuBhYvq76lv-OTWxAZk9fLITXu2CP280A",
+  authDomain: "mobile-project-maksuda.firebaseapp.com",
+  projectId: "mobile-project-maksuda",
+  storageBucket: "mobile-project-maksuda.appspot.com",
+  messagingSenderId: "642860276906",
+  appId: "1:642860276906:web:d595ea3a9e82bb268f04d3",
+};
+
+initializeApp(firebaseConfig);
 
 const ReportMissingPetScreen = ({ navigation }) => {
   useEffect(() => {
@@ -32,6 +45,17 @@ const ReportMissingPetScreen = ({ navigation }) => {
       aspect: [4, 3],
       quality: 1,
     });
+
+    if (!result.cancelled) {
+      const storage = getStorage(); //the storage itself
+      const ref = ref(storage, "image.jpg"); //how the image will be addressed inside the storage
+
+      //convert image to array of bytes
+      const img = await fetch(result.uri);
+      const bytes = await img.blob();
+
+      await uploadBytes(ref, bytes); //upload images
+    }
   };
 
   return (
@@ -97,10 +121,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
                 <Text style={styles.btnText}>UPLOAD PET'S PHOTO</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
-                style={styles.button}
-                // onPress={onPress}
-              >
+              <TouchableOpacity style={styles.button} onPress={pickImage}>
                 <Text style={styles.btnText}>YOUR PHOTO WITH PET</Text>
               </TouchableOpacity>
 
