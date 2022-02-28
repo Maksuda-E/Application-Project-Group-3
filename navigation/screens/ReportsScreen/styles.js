@@ -38,6 +38,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.colors.dark,
     borderRadius: 15,
   },
+  subTitle: {
+    fontSize: 24,
+    fontFamily: 'notoserif',
+    fontWeight: 'bold',
+    color: Colors.colors.theme,
+    marginTop: 15,
+    marginHorizontal: '5%',
+  },
   buttonText: {
     color: 'white',
     fontSize: 18,
