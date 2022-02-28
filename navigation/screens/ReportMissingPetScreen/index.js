@@ -11,6 +11,8 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { initializeApp } from "firebase/app"; //validate yourself
 import { getStorage, ref, uploadBytes } from "firebase/storage"; //access the storage database
+import * as firebase from "firebase";
+import "@firebase/firestore";
 
 import styles from "./styles";
 
