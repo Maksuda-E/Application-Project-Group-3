@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,25 +9,20 @@ import {
   ScrollView,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { initializeApp } from "firebase/app"; //validate yourself
-import { getStorage, ref, uploadBytes } from "firebase/storage"; //access the storage database
-import * as firebase from "firebase";
-import "@firebase/firestore";
+import { firestore, storage } from "./../../../firebaseConfig";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import styles from "./styles";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDuBhYvq76lv-OTWxAZk9fLITXu2CP280A",
-  authDomain: "mobile-project-maksuda.firebaseapp.com",
-  projectId: "mobile-project-maksuda",
-  storageBucket: "mobile-project-maksuda.appspot.com",
-  messagingSenderId: "642860276906",
-  appId: "1:642860276906:web:d595ea3a9e82bb268f04d3",
-};
-
-initializeApp(firebaseConfig);
-
 const ReportMissingPetScreen = ({ navigation }) => {
+  const [image, setImage] = useState(null);
+  const [petName, setPetName] = useState("");
+  const [dateLost, setDateLost] = useState("");
+  const [species, setSpecies] = useState("");
+  const [Gender, setGender] = useState("");
+  const [colour, setColour] = useState("");
+  const [isChip, setIsChip] = useState("");
+
   useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
@@ -49,16 +44,43 @@ const ReportMissingPetScreen = ({ navigation }) => {
     });
 
     if (!result.cancelled) {
-      const storage = getStorage(); //the storage itself
-      const ref = ref(storage, "image.jpg"); //how the image will be addressed inside the storage
-
-      //convert image to array of bytes
-      const img = await fetch(result.uri);
-      const bytes = await img.blob();
-
-      await uploadBytes(ref, bytes); //upload images
+      setImage(result.uri);
     }
   };
+
+  function uploadData() {
+    storage
+      .ref(image.split("/").pop())
+      .put(setImage)
+      .then(() => {
+        console.log(`${image} has been succussfully uploaded`);
+      })
+      .catch((err) => console.log("uploading image error => ", err));
+
+    firestore
+      .collection("reportLostPet")
+      .set(
+        {
+          image: image,
+          petName: petName,
+          dateLost: dateLost,
+          species: species,
+          Gender: Gender,
+          colour: colour,
+          isChip: isChip,
+        },
+        {
+          merge: true,
+        }
+      )
+      .then(function () {
+        console.log("Data has been uploaded successfully!");
+      })
+      .catch(function (error) {
+        Alert.alert("Something went wrong!");
+        console.log("Error: ", error);
+      });
+  }
 
   return (
     <SafeAreaView>
@@ -74,13 +96,9 @@ const ReportMissingPetScreen = ({ navigation }) => {
               <Text style={styles.noticeStart}>Before You Start...</Text>
               <Text style={styles.noticeTxt}>
                 1. Fields below are required filled.{"\n"}2. To make sure we
-                don't mistake your pet in the future, please{" "}
+                don't make mistake your pet in the future, please{" "}
                 <Text style={{ color: "#FB9A44" }}>
-                  upload a photo of your pet
-                </Text>{" "}
-                and a{" "}
-                <Text style={{ color: "#FB9A44" }}>
-                  picture of yourself with your pet
+                  upload a photo of yourself with your pet
                 </Text>
                 .
               </Text>
@@ -88,49 +106,66 @@ const ReportMissingPetScreen = ({ navigation }) => {
             <Text style={styles.vitals}>Pet Vitals</Text>
 
             <Text style={styles.cates}>Pet's Name:</Text>
-            <TextInput style={styles.textInput} placeholder="Your pet's name" />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Your pet's name"
+              value={petName}
+              onChangeText={(value) => setPetName(value)}
+            />
 
             <Text style={styles.cates}>Date Lost:</Text>
             <TextInput
               style={styles.textInput}
               placeholder="e.g. 2022.02.25"
               keyboardType="numeric"
+              value={dateLost}
+              onChangeText={(value) => setDateLost(value)}
             />
 
             <Text style={styles.cates}>Species:</Text>
             <TextInput
               style={styles.textInput}
               placeholder="e.g. cat/dog/bird"
+              value={species}
+              onChangeText={(value) => setSpecies(value)}
             />
 
             <Text style={styles.cates}>Gender:</Text>
             <TextInput
               style={styles.textInput}
               placeholder="e.g. male/female"
+              value={Gender}
+              onChangeText={(value) => setGender(value)}
             />
 
             <Text style={styles.cates}>Coat Colour:</Text>
             <TextInput
               style={styles.textInput}
               placeholder="e.g. tabby/calico"
+              value={colour}
+              onChangeText={(value) => setColour(value)}
             />
 
             <Text style={styles.cates}>Is there a microchip or tattoo?</Text>
-            <TextInput style={styles.textInput} placeholder="e.g. yes/no" />
+            <TextInput
+              style={styles.textInput}
+              placeholder="e.g. yes/no"
+              value={isChip}
+              onChangeText={(value) => setIsChip(value)}
+            />
 
             <View style={styles.btnContainer}>
-              <TouchableOpacity style={styles.button} onPress={pickImage}>
+              {/* <TouchableOpacity style={styles.button} onPress={pickImage}>
+                <Image source={{ uri: image }} />
+
                 <Text style={styles.btnText}>UPLOAD PET'S PHOTO</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
               <TouchableOpacity style={styles.button} onPress={pickImage}>
                 <Text style={styles.btnText}>YOUR PHOTO WITH PET</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
-                style={styles.button}
-                // onPress={onPress}
-              >
+              <TouchableOpacity style={styles.button} onPress={uploadData}>
                 <Text style={styles.btnSubmit}>SUBMIT</Text>
               </TouchableOpacity>
             </View>
