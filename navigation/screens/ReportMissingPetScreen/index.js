@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,8 +10,7 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { firestore } from "./../../../firebaseConfig";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import styles from "./styles";
 
 const ReportMissingPetScreen = ({ navigation }) => {
@@ -22,6 +21,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
   const [Gender, setGender] = useState("");
   const [colour, setColour] = useState("");
   const [isChip, setIsChip] = useState("");
+  const [contactInfo, setContactInfo] = useState("");
 
   const verifyPermission = async () => {
     const cameraResult = await ImagePicker.requestCameraPermissionsAsync();
@@ -71,6 +71,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
         Gender: Gender,
         colour: colour,
         isChip: isChip,
+        contactInfo: contactInfo,
       })
       .then(() => {
         console.log("Data has been uploaded successfully!");
@@ -151,6 +152,14 @@ const ReportMissingPetScreen = ({ navigation }) => {
               placeholder="e.g. yes/no"
               value={isChip}
               onChangeText={(value) => setIsChip(value)}
+            />
+
+            <Text style={styles.cates}>Contact Info</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder="e.g. your name/your phone number"
+              value={contactInfo}
+              onChangeText={(value) => setContactInfo(value)}
             />
 
             <View style={styles.btnContainer}>
