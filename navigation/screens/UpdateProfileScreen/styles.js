@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
 image:{
     width: 150,
     height: 150,
-    marginLeft: 70,
-    marginTop: 20,
+    marginLeft: '25%',
+    marginTop: '20%',
 },
 textInput: {
     borderColor: '#ccc',
@@ -47,8 +47,8 @@ textInput: {
     textAlignVertical: 'top',
 },
 buttonContainer:{
-  paddingLeft: 30,
-  paddingRight: 30,
+  paddingLeft: 40,
+  paddingRight: 40,
   marginTop: 10,
   flexDirection: 'row',
   justifyContent: 'space-between'
