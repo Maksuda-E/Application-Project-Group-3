@@ -13,13 +13,10 @@ import {firestore} from "../../../firebaseConfig";
 const ReportsScreen = ({navigation}) => {
     let [missingpets, setMissingpets] = useState([]);
     let [foundpets, setFoundpets] = useState([]);
-    console.log("111")
 
     useEffect(() => {
-        console.log("222")
         const subscriber = async () => {
             try {
-                console.log("333")
                 let result = [];
                 let data = await firestore.collection('missingPets').get();
 
@@ -34,7 +31,6 @@ const ReportsScreen = ({navigation}) => {
                         });
                     }
                 })
-                console.log(result)
 
                 setMissingpets(result);
                 result = [];
@@ -54,7 +50,6 @@ const ReportsScreen = ({navigation}) => {
                 })
 
                 setFoundpets(result);
-                console.log(result)
             } catch (err) {
                 console.log(err);
             }
