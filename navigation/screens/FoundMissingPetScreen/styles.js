@@ -21,6 +21,8 @@ const styles = StyleSheet.create({
     color: Colors.colors.dark,
     marginTop: '15%',
     marginHorizontal: '5%',
+    textAlign: 'center',
+
   },
   lostButton: {
     width: '40%',
@@ -41,7 +43,34 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 18,
+  },
+  form: {
+    paddingHorizontal: 13
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: Colors.colors.dark,
+    paddingBottom: 2,
+    paddingLeft: 3,
+  },
+  textInputShort: {
+    paddingVertical: 5,
+    backgroundColor: '#ffffff',
+    borderRadius: 4,
+    textAlignVertical: 'center',
+    paddingLeft: 7,
+    paddingTop: 2
+  },
+  imageContainer: {
+    marginTop: 15,
+    marginBottom: 15,
+    alignSelf: 'center'
+  },
+  smallContainer: {
+    marginBottom: 8
   }
+
 });
 
 export default styles;
