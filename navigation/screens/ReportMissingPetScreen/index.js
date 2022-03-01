@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { firestore, storage } from "./../../../firebaseConfig";
+import { firestore } from "./../../../firebaseConfig";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import styles from "./styles";
@@ -23,57 +23,56 @@ const ReportMissingPetScreen = ({ navigation }) => {
   const [colour, setColour] = useState("");
   const [isChip, setIsChip] = useState("");
 
-  useEffect(() => {
-    (async () => {
-      if (Platform.OS !== "web") {
-        const { status } =
-          await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== "granted") {
-          alert("Sorry, we need camera roll permissions to make this work!");
-        }
-      }
-    })();
-  }, []);
+  const verifyPermission = async () => {
+    const cameraResult = await ImagePicker.requestCameraPermissionsAsync();
+    const libraryResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+    if (
+      cameraResult.status !== "granted" &&
+      libraryResult.status !== "granted"
+    ) {
+      Alert.alert(
+        "Insufficient Permissions!",
+        "You need to grant camera permissions to use this app.",
+        [{ text: "Okay" }]
+      );
+      return false;
+    }
+    return true;
+  };
+
+  const retrieveImageHandler = async () => {
+    const hasPermission = await verifyPermission();
+    if (!hasPermission) {
+      return false;
+    }
+
+    const image = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1,
+      quality: 0.5,
     });
 
-    if (!result.cancelled) {
-      setImage(result.uri);
+    if (!image.cancelled) {
+      setImage(image.uri);
     }
   };
 
   function uploadData() {
-    storage
-      .ref(image.split("/").pop())
-      .put(setImage)
-      .then(() => {
-        console.log(`${image} has been succussfully uploaded`);
-      })
-      .catch((err) => console.log("uploading image error => ", err));
-
     firestore
       .collection("reportLostPet")
-      .set(
-        {
-          image: image,
-          petName: petName,
-          dateLost: dateLost,
-          species: species,
-          Gender: Gender,
-          colour: colour,
-          isChip: isChip,
-        },
-        {
-          merge: true,
-        }
-      )
-      .then(function () {
+      .add({
+        image: image,
+        petName: petName,
+        dateLost: dateLost,
+        species: species,
+        Gender: Gender,
+        colour: colour,
+        isChip: isChip,
+      })
+      .then(() => {
         console.log("Data has been uploaded successfully!");
       })
       .catch(function (error) {
@@ -155,13 +154,15 @@ const ReportMissingPetScreen = ({ navigation }) => {
             />
 
             <View style={styles.btnContainer}>
-              {/* <TouchableOpacity style={styles.button} onPress={pickImage}>
+              {/* <TouchableOpacity style={styles.button} onPress={retrieveImageHandler}>
                 <Image source={{ uri: image }} />
-
                 <Text style={styles.btnText}>UPLOAD PET'S PHOTO</Text>
               </TouchableOpacity> */}
 
-              <TouchableOpacity style={styles.button} onPress={pickImage}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={retrieveImageHandler}
+              >
                 <Text style={styles.btnText}>YOUR PHOTO WITH PET</Text>
               </TouchableOpacity>
 
