@@ -1,5 +1,5 @@
 # Application-Project-Group-3
-This project has build by using expo framework (set of tools and services built around React Native platforms)
+This project has build by using expo framework (set of tools and services built around React Native platforms).
 
 ## Dependency
 Run 'npm install' to build the entire project before running in your device.
