@@ -157,7 +157,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
             <Text style={styles.cates}>Contact Info</Text>
             <TextInput
               style={styles.textInput}
-              placeholder="e.g. your name/your phone number"
+              placeholder="Your name/phone number"
               value={contactInfo}
               onChangeText={(value) => setContactInfo(value)}
             />
