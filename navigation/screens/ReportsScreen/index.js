@@ -18,16 +18,29 @@ const ReportsScreen = ({navigation}) => {
         const subscriber = async () => {
             try {
                 let result = [];
-                let data = await firestore.collection('missingPets').get();
+                // let data = await firestore.collection('missingPets').get();
+                let data = await firestore.collection('reportLostPets').get();
 
                 data.forEach(e => {
 
+                    // if (e.id) {
+                    //     result.push({
+                    //         id: e.id,
+                    //         type: e.data().type,
+                    //         breed: e.data().breed,
+                    //         description: e.data().description,
+                    //     });
+                    // }
                     if (e.id) {
                         result.push({
                             id: e.id,
-                            type: e.data().type,
+                            address: e.data().address,
                             breed: e.data().breed,
+                            contactNumber: e.data().contactNumber,
+                            dateFound: e.data().dateFound,
                             description: e.data().description,
+                            imageUri: e.data().imageUri,
+                            species: e.data().species,
                         });
                     }
                 })
@@ -35,16 +48,29 @@ const ReportsScreen = ({navigation}) => {
                 setMissingpets(result);
                 result = [];
 
-                data = await firestore.collection('foundPets').get();
+                // data = await firestore.collection('foundPets').get();
+                data = await firestore.collection('reportFoundPets').get();
 
                 data.forEach(e => {
 
+                    // if (e.id) {
+                    //     result.push({
+                    //         id: e.id,
+                    //         type: e.data().type,
+                    //         breed: e.data().breed,
+                    //         description: e.data().description,
+                    //     });
+                    // }
                     if (e.id) {
                         result.push({
                             id: e.id,
-                            type: e.data().type,
+                            address: e.data().address,
                             breed: e.data().breed,
+                            contactNumber: e.data().contactNumber,
+                            dateFound: e.data().dateFound,
                             description: e.data().description,
+                            imageUri: e.data().imageUri,
+                            species: e.data().species,
                         });
                     }
                 })
