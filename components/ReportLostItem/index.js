@@ -25,7 +25,6 @@ const ReportLostItem = ({ pet }) => {
         <Text style={styles.itemTitle}>isChip:{pet.isChip}</Text>
         <Text style={styles.itemTitle}>Gender:{pet.Gender}</Text>
         <Text style={styles.itemTitle}>dateLost:{pet.dateLost}</Text>
-        <Text style={styles.state}>description:{pet.description}</Text>
       </View>
     </View>
   )

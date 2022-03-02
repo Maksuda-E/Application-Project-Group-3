@@ -23,7 +23,7 @@ const ReportItem = ({ pet }) => {
           <Text style={styles.itemTitle}>contactNumber:{pet.contactNumber}</Text>
           <Text style={styles.itemTitle}>breed:{pet.breed}</Text>
           <Text style={styles.itemTitle}>dateFound:{pet.dateFound}</Text>
-        <Text style={styles.state}>description:{pet.description}</Text>
+        <Text style={styles.itemTitle}>description:{pet.description}</Text>
       </View>
     </View>
   )
