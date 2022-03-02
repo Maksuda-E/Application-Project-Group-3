@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import styles from './styles';
 import ReportItem from "../../../components/ReportItem";
 import {firestore} from "../../../firebaseConfig";
+import ReportLostItem from "../../../components/ReportLostItem";
 
 const ReportsScreen = ({navigation}) => {
     let [missingpets, setMissingpets] = useState([]);
@@ -19,7 +20,7 @@ const ReportsScreen = ({navigation}) => {
             try {
                 let result = [];
                 // let data = await firestore.collection('missingPets').get();
-                let data = await firestore.collection('reportLostPets').get();
+                let data = await firestore.collection('reportLostPet').get();
 
                 data.forEach(e => {
 
@@ -34,12 +35,13 @@ const ReportsScreen = ({navigation}) => {
                     if (e.id) {
                         result.push({
                             id: e.id,
-                            address: e.data().address,
-                            breed: e.data().breed,
-                            contactNumber: e.data().contactNumber,
-                            dateFound: e.data().dateFound,
-                            description: e.data().description,
-                            imageUri: e.data().imageUri,
+                            Gender: e.data().Gender,
+                            colour: e.data().colour,
+                            contactInfo: e.data().contactInfo,
+                            dateLost: e.data().dateLost,
+                            isChip: e.data().isChip,
+                            petName: e.data().petName,
+                            image: e.data().image,
                             species: e.data().species,
                         });
                     }
@@ -49,7 +51,7 @@ const ReportsScreen = ({navigation}) => {
                 result = [];
 
                 // data = await firestore.collection('foundPets').get();
-                data = await firestore.collection('reportFoundPets').get();
+                data = await firestore.collection('reportFoundPet').get();
 
                 data.forEach(e => {
 
@@ -91,7 +93,7 @@ const ReportsScreen = ({navigation}) => {
           <ScrollView>
               {
                   missingpets.map((pet) =>
-                      <ReportItem pet={pet} />)
+                      <ReportLostItem pet={pet} />)
               }
           </ScrollView>
 
