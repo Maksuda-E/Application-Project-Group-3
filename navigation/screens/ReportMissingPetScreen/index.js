@@ -177,7 +177,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
                 zIndexInverse={1000}
                 placeholder="Select a species"
                 placeholderStyle={{
-                  color: "lightgrey",
+                  color: "grey",
                 }}
                 style={{
                   borderColor: "transparent",
@@ -207,7 +207,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
                 zIndexInverse={2000}
                 placeholder="Select a gender"
                 placeholderStyle={{
-                  color: "lightgrey",
+                  color: "grey",
                 }}
                 style={{
                   borderColor: "transparent",
@@ -245,7 +245,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
                 zIndexInverse={3000}
                 placeholder="Select an item"
                 placeholderStyle={{
-                  color: "lightgrey",
+                  color: "grey",
                 }}
                 style={{
                   borderColor: "transparent",
