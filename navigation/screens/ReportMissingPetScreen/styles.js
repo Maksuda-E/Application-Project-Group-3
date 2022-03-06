@@ -13,12 +13,12 @@ const styles = StyleSheet.create({
     fontFamily: "notoserif",
     fontWeight: "bold",
     color: Colors.colors.dark,
-    top: "6%",
+    top: "4%",
     textAlign: "center",
   },
 
   bodyContainer: {
-    marginTop: 80,
+    marginTop: 60,
     flex: 1,
     justifyContent: "center",
     marginHorizontal: 20,
