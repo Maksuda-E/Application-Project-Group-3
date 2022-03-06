@@ -6,68 +6,74 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     resizeMode: "cover",
-    justifyContent: "center",
   },
 
   title: {
     fontSize: 30,
     fontFamily: "notoserif",
     fontWeight: "bold",
-    color: Colors.colors.theme,
-    position: "absolute",
-    top: "10%",
-    left: "5%",
-  },
-
-  container: {
-    marginTop: -30,
+    color: Colors.colors.dark,
+    top: "6%",
+    textAlign: "center",
   },
 
   bodyContainer: {
-    // marginLeft: 20,
-    marginTop: 140,
+    marginTop: 80,
     flex: 1,
     justifyContent: "center",
     marginHorizontal: 20,
+    width: "98%",
   },
 
   textInput: {
-    borderWidth: 1,
-    borderColor: "grey",
-    width: 200,
-    padding: 6,
-    backgroundColor: "white",
+    marginTop: 3,
+    width: "92%",
+    paddingVertical: 5,
+    paddingLeft: 7,
+    backgroundColor: "#ffffff",
     marginBottom: 10,
-    fontSize: 16,
-    borderRadius: 6,
-  },
-
-  vitals: {
-    marginBottom: 10,
-    fontSize: 22,
-    fontWeight: "bold",
-    color: Colors.colors.light,
+    // fontSize: 16,
+    borderRadius: 4,
   },
 
   cates: {
     fontSize: 16,
     fontWeight: "700",
-    color: Colors.colors.red,
+    color: Colors.colors.dark,
   },
 
   btnContainer: {
     display: "flex",
-    width: "100%",
     marginTop: 15,
+    marginRight: 15,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "93%",
+    paddingHorizontal: 30,
+  },
+
+  imageContainer: {
+    marginBottom: 10,
+    alignSelf: "center",
+    width: 390,
   },
 
   button: {
     alignItems: "center",
-    backgroundColor: Colors.colors.theme,
+    backgroundColor: Colors.colors.dark,
     padding: 10,
-    marginBottom: 20,
-    borderRadius: 8,
-    maxWidth: "100%",
+    marginBottom: 25,
+    borderRadius: 15,
+    width: "40%",
+  },
+
+  cancelBtn: {
+    alignItems: "center",
+    backgroundColor: Colors.colors.red,
+    padding: 10,
+    marginBottom: 25,
+    borderRadius: 15,
+    width: "40%",
   },
 
   btnText: {
@@ -91,7 +97,7 @@ const styles = StyleSheet.create({
   noticeTxt: {
     fontSize: 14,
     color: Colors.colors.light,
-    marginBottom: 10,
+    marginBottom: 15,
   },
 });
 
