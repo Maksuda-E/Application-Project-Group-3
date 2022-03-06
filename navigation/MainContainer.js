@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from 'react-native-vector-icons';
 import HomeScreenNavigator from './CustomNavigation';
 import ProfileScreenNavigator from './ProfileNavigation';
-import ReportsScreen from './screens/ReportsScreen';
+import ReportsNavigator from './ReportNavigation';
 import InfoScreen from './screens/InfoScreen';
 import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import Colors from '../constants/Colors';
@@ -43,7 +43,7 @@ export default function MainContainer() {
         })}
         >
       <Tab.Screen name={'Home'} component={HomeScreenNavigator} options={{ headerShown: false }} />
-      <Tab.Screen name={'Reports'} component={ReportsScreen} options={{ headerShown: false }} />
+      <Tab.Screen name={'Reports'} component={ReportsNavigator} options={{ headerShown: false }} />
       <Tab.Screen name={'Profile'} component={ProfileScreenNavigator} options={{ headerShown: false }} />
       <Tab.Screen name={'Info'} component={InfoScreen} options={{ headerShown: false }} />
     </Tab.Navigator>

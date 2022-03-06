@@ -1,110 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import {
-    View,
-    Text,
-    ImageBackground, ScrollView,
+import React from 'react';
+import { 
+  View, 
+  Text,
+  ImageBackground,
+  TouchableOpacity,
 } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 import styles from './styles';
-import ReportItem from "../../../components/ReportItem";
-import {firestore} from "../../../firebaseConfig";
-import ReportLostItem from "../../../components/ReportLostItem";
 
-const ReportsScreen = ({navigation}) => {
-    let [missingpets, setMissingpets] = useState([]);
-    let [foundpets, setFoundpets] = useState([]);
-
-    useEffect(() => {
-        const subscriber = async () => {
-            try {
-                let result = [];
-                // let data = await firestore.collection('missingPets').get();
-                let data = await firestore.collection('reportLostPet').get();
-
-                data.forEach(e => {
-
-                    // if (e.id) {
-                    //     result.push({
-                    //         id: e.id,
-                    //         type: e.data().type,
-                    //         breed: e.data().breed,
-                    //         description: e.data().description,
-                    //     });
-                    // }
-                    if (e.id) {
-                        result.push({
-                            id: e.id,
-                            Gender: e.data().Gender,
-                            colour: e.data().colour,
-                            contactInfo: e.data().contactInfo,
-                            dateLost: e.data().dateLost,
-                            isChip: e.data().isChip,
-                            petName: e.data().petName,
-                            image: e.data().image,
-                            species: e.data().species,
-                        });
-                    }
-                })
-
-                setMissingpets(result);
-                result = [];
-
-                // data = await firestore.collection('foundPets').get();
-                data = await firestore.collection('reportFoundPet').get();
-
-                data.forEach(e => {
-
-                    // if (e.id) {
-                    //     result.push({
-                    //         id: e.id,
-                    //         type: e.data().type,
-                    //         breed: e.data().breed,
-                    //         description: e.data().description,
-                    //     });
-                    // }
-                    if (e.id) {
-                        result.push({
-                            id: e.id,
-                            address: e.data().address,
-                            breed: e.data().breed,
-                            contactNumber: e.data().contactNumber,
-                            dateFound: e.data().dateFound,
-                            description: e.data().description,
-                            imageUri: e.data().imageUri,
-                            species: e.data().species,
-                        });
-                    }
-                })
-
-                setFoundpets(result);
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        subscriber();
-    }, []);
+const ReportsScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <View>
       <ImageBackground source={ require('../../../assets/data/images/background.jpg') } style={styles.background} >
-        <Text style={styles.title}>Report</Text>
-
-          <Text style={styles.subTitle}>Missing Pets List</Text>
-          <ScrollView>
-              {
-                  missingpets.map((pet) =>
-                      <ReportLostItem pet={pet} />)
-              }
-          </ScrollView>
-
-          <Text style={styles.subTitle}>Found Pets List</Text>
-          <ScrollView>
-              {
-                  foundpets.map((pet) =>
-                      <ReportItem pet={pet} />)
-              }
-          </ScrollView>
-
+        <Text style={styles.title}>Reports</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.lostButton} activeOpacity={0.8} onPress={() => navigation.navigate("MissingPetReports")}>
+            <Text style={styles.buttonText}>Missing Pets</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.foundButton} activeOpacity={0.8} onPress={() => navigation.navigate("FoundPetReports")}>
+            <Text style={styles.buttonText}>Found Pets</Text>
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
     </View>
   )
