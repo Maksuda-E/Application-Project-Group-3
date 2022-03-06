@@ -45,7 +45,6 @@ const FoundPetReports = ({navigation}) => {
                 })
 
                 setFoundpets(result);
-                console.log(result);
             } catch (err) {
                 console.log(err);
             }
