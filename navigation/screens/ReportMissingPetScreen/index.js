@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -15,12 +15,11 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import styles from "./styles";
 
-// console.disableYellowBox = true;
-
 LogBox.ignoreAllLogs();
 DropDownPicker.setListMode("SCROLLVIEW");
 
 const ReportMissingPetScreen = ({ navigation }) => {
+  const [petImage, setPetImage] = useState(null);
   const [image, setImage] = useState(null);
   const [petName, setPetName] = useState("");
   const [dateLost, setDateLost] = useState("");
@@ -29,18 +28,53 @@ const ReportMissingPetScreen = ({ navigation }) => {
   const [breed, setBreed] = useState("");
   const [isChip, setIsChip] = useState("");
   const [address, setAddress] = useState("");
-  const [contactInfo, setContactInfo] = useState("");
+  const [contactName, setContactName] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
 
-  const [open, setOpen] = useState(false);
+  //For gender dropdown box
+  const [genderOpen, setGenderOpen] = useState(false);
   const [items, setItems] = useState([
     { label: "Male", value: "male" },
     { label: "Female", value: "female" },
   ]);
 
+  // For species dropdown Box
+  const [speciesOpen, setSpeciesOpen] = useState(false);
+  const [itemSpecies, setItemSpecies] = useState([
+    { label: "Bird", value: "bird" },
+    { label: "Cat", value: "cat" },
+    { label: "Dog", value: "dog" },
+    { label: "Guinea Pig", value: "guinea pig" },
+    { label: "Rabbit", value: "rabbit" },
+  ]);
+
+  // For mirochip or not
+  const [chipOpen, setChipOpen] = useState(false);
+  const [itemChip, setItemChip] = useState([
+    { label: "Yes", value: "yes" },
+    { label: "No", value: "no" },
+  ]);
+
+  const onSpeciesOpen = useCallback(() => {
+    setGenderOpen(false);
+    setChipOpen(false);
+  }, []);
+
+  const onGenderOpen = useCallback(() => {
+    setSpeciesOpen(false);
+    setChipOpen(false);
+  }, []);
+
+  const onChipOpen = useCallback(() => {
+    setSpeciesOpen(false);
+    setGenderOpen(false);
+  }, []);
+
   function uploadData() {
     firestore
       .collection("reportLostPet")
       .add({
+        petImage: petImage,
         image: image,
         petName: petName,
         dateLost: dateLost,
@@ -49,7 +83,8 @@ const ReportMissingPetScreen = ({ navigation }) => {
         breed: breed,
         isChip: isChip,
         address: address,
-        contactInfo: contactInfo,
+        contactName: contactName,
+        contactPhone: contactPhone,
       })
       .then(() => {
         console.log("Data has been uploaded successfully!");
@@ -60,15 +95,17 @@ const ReportMissingPetScreen = ({ navigation }) => {
       });
 
     // remove the field's data
+    setPetImage(null);
     setImage(null);
     setPetName("");
     setDateLost("");
-    setSpecies("");
+    setSpecies(null);
     setGender(null);
     setBreed("");
     setIsChip("");
     setAddress("");
-    setContactInfo("");
+    setContactName("");
+    setContactPhone("");
   }
 
   return (
@@ -92,6 +129,14 @@ const ReportMissingPetScreen = ({ navigation }) => {
                 </Text>
                 .
               </Text>
+            </View>
+
+            <Text style={styles.cates}>YOUR PET'S PHOTO</Text>
+            <View style={styles.imageContainer}>
+              <ImageSelector
+                imageUri={petImage}
+                onChangeImage={(uri) => setPetImage(uri)}
+              />
             </View>
 
             <Text style={styles.cates}>YOUR PHOTO WITH PET</Text>
@@ -120,24 +165,60 @@ const ReportMissingPetScreen = ({ navigation }) => {
             />
 
             <Text style={styles.cates}>Species</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="e.g. cat, dog, bird"
-              value={species}
-              onChangeText={(value) => setSpecies(value)}
-            />
+            <View
+              style={{
+                width: "92%",
+                marginBottom: 7,
+                marginTop: 2,
+              }}
+            >
+              <DropDownPicker
+                zIndex={3000}
+                zIndexInverse={1000}
+                placeholder="Select a species"
+                placeholderStyle={{
+                  color: "grey",
+                }}
+                style={{
+                  borderColor: "transparent",
+                  height: 40,
+                  borderRadius: 6,
+                }}
+                open={speciesOpen}
+                onOpen={onSpeciesOpen}
+                value={species}
+                items={itemSpecies}
+                setOpen={setSpeciesOpen}
+                setItems={setItemSpecies}
+                setValue={setSpecies}
+              />
+            </View>
 
             <Text style={styles.cates}>Gender</Text>
-            <View style={{ width: "92%", marginBottom: 7, marginTop: 2 }}>
+            <View
+              style={{
+                width: "92%",
+                marginBottom: 7,
+                marginTop: 2,
+              }}
+            >
               <DropDownPicker
+                zIndex={2000}
+                zIndexInverse={2000}
                 placeholder="Select a gender"
                 placeholderStyle={{
                   color: "grey",
                 }}
-                open={open}
+                style={{
+                  borderColor: "transparent",
+                  height: 40,
+                  borderRadius: 6,
+                }}
+                open={genderOpen}
+                onOpen={onGenderOpen}
                 value={gender}
                 items={items}
-                setOpen={setOpen}
+                setOpen={setGenderOpen}
                 setItems={setItems}
                 setValue={setGender}
               />
@@ -151,13 +232,35 @@ const ReportMissingPetScreen = ({ navigation }) => {
               onChangeText={(value) => setBreed(value)}
             />
 
-            <Text style={styles.cates}>Is there a microchip or tattoo</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="e.g. Yes or No"
-              value={isChip}
-              onChangeText={(value) => setIsChip(value)}
-            />
+            <Text style={styles.cates}>Is there a microchip?</Text>
+            <View
+              style={{
+                width: "92%",
+                marginBottom: 7,
+                marginTop: 2,
+              }}
+            >
+              <DropDownPicker
+                zIndex={1000}
+                zIndexInverse={3000}
+                placeholder="Select an item"
+                placeholderStyle={{
+                  color: "grey",
+                }}
+                style={{
+                  borderColor: "transparent",
+                  height: 40,
+                  borderRadius: 6,
+                }}
+                open={chipOpen}
+                onOpen={onChipOpen}
+                value={isChip}
+                items={itemChip}
+                setOpen={setChipOpen}
+                setItems={setItemChip}
+                setValue={setIsChip}
+              />
+            </View>
 
             <Text style={styles.cates}>Address</Text>
             <TextInput
@@ -170,9 +273,17 @@ const ReportMissingPetScreen = ({ navigation }) => {
             <Text style={styles.cates}>Contact Info</Text>
             <TextInput
               style={styles.textInput}
-              placeholder="Your name, phone number (123) 456 7890"
-              value={contactInfo}
-              onChangeText={(value) => setContactInfo(value)}
+              placeholder="Your name"
+              value={contactName}
+              onChangeText={(value) => setContactName(value)}
+            />
+
+            <Text style={styles.cates}>Phone Number</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder="e.g. 416-456-7890"
+              value={contactPhone}
+              onChangeText={(value) => setContactPhone(value)}
             />
 
             <View style={styles.btnContainer}>
