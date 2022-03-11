@@ -99,6 +99,18 @@ const styles = StyleSheet.create({
     color: Colors.colors.light,
     marginBottom: 15,
   },
+
+  datePickerStyle: {
+    marginTop: 3,
+    width: "92%",
+    paddingVertical: 2,
+    paddingLeft: 7,
+    paddingRight: 7,
+    backgroundColor: "#ffffff",
+    marginBottom: 10,
+    fontSize: 16,
+    borderRadius: 4,
+  },
 });
 
 export default styles;
