@@ -12,6 +12,7 @@ import {
 import { firestore } from "./../../../firebaseConfig";
 import ImageSelector from "../../../components/ImageSelector/ImageSelector";
 import DropDownPicker from "react-native-dropdown-picker";
+import DatePicker from "react-native-datepicker";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import styles from "./styles";
 
@@ -156,12 +157,32 @@ const ReportMissingPetScreen = ({ navigation }) => {
             />
 
             <Text style={styles.cates}>Date Lost</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="e.g. 2022.02.25"
-              keyboardType="numeric"
-              value={dateLost}
-              onChangeText={(value) => setDateLost(value)}
+            <DatePicker
+              style={styles.datePickerStyle}
+              date={dateLost} // Initial date from state
+              mode="date" // The enum of date, datetime and time
+              placeholder="Select the date"
+              format="YYYY-MM-DD"
+              minDate="2020-01-01"
+              maxDate="2023-06-30"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              customStyles={{
+                dateIcon: {
+                  // display: "none",
+                  position: "absolute",
+                  left: 0,
+                  top: 4,
+                  marginLeft: 0,
+                },
+                dateInput: {
+                  marginLeft: 36,
+                  borderColor: "white",
+                },
+              }}
+              onDateChange={(value) => {
+                setDateLost(value);
+              }}
             />
 
             <Text style={styles.cates}>Species</Text>
