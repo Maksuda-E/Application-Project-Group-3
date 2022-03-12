@@ -58,11 +58,7 @@ const InfoScreen = ({ navigation }) => {
         <ScrollView>
           {
             contacts.map((contact) =>
-<<<<<<< HEAD
               <QuickContact key={contact.id} contact={contact} />)
-=======
-            <QuickContact key={contact.id} contact={contact} />)
->>>>>>> fd774768f94a5c2fd72867bf847dcc69a15b3487
           }
         </ScrollView>
       </ImageBackground>
