@@ -10,7 +10,6 @@ import call from 'react-native-phone-call';
 import styles from './styles';
 
 const QuickContact = ({ contact }) => {
-  console.log(contact.name);
   const triggerCall = (phone) => {
     const args = {
       number: phone,
