@@ -15,6 +15,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-datepicker";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import styles from "./styles";
+import * as FileSystem from "expo-file-system";
 
 LogBox.ignoreAllLogs();
 DropDownPicker.setListMode("SCROLLVIEW");
@@ -71,29 +72,47 @@ const ReportMissingPetScreen = ({ navigation }) => {
     setGenderOpen(false);
   }, []);
 
-  function uploadData() {
+  async function uploadData() {
+
+    const petImageType = petImage.split('.').slice(-1)[0];
+    let fsRead = await FileSystem.readAsStringAsync(
+        petImage,
+        {
+          encoding: "base64",
+        }
+    );
+    const uploadPetImage = 'data:image/' + petImageType + ';base64,' + fsRead;
+
+    const imageType = image.split('.').slice(-1)[0];
+    fsRead = await FileSystem.readAsStringAsync(
+        image,
+        {
+          encoding: "base64",
+        }
+    );
+    const uploadImage = 'data:image/' + imageType + ';base64,' + fsRead;
     firestore
-      .collection("reportLostPet")
-      .add({
-        petImage: petImage,
-        image: image,
-        petName: petName,
-        dateLost: dateLost,
-        species: species,
-        gender: gender,
-        breed: breed,
-        isChip: isChip,
-        address: address,
-        contactName: contactName,
-        contactPhone: contactPhone,
-      })
-      .then(() => {
-        console.log("Data has been uploaded successfully!");
-      })
-      .catch(function (error) {
-        Alert.alert("Something went wrong!");
-        console.log("Error: ", error);
-      });
+        .collection("reportLostPet")
+        .add({
+          petImage: uploadPetImage,
+          image: uploadImage,
+          petName: petName,
+          dateLost: dateLost,
+          species: species,
+          gender: gender,
+          breed: breed,
+          isChip: isChip,
+          address: address,
+          contactName: contactName,
+          contactPhone: contactPhone,
+        })
+        .then(() => {
+          console.log("Data has been uploaded successfully!");
+        })
+        .catch(function (error) {
+          Alert.alert("Something went wrong!");
+          console.log("Error: ", error);
+        });
 
     // remove the field's data
     setPetImage(null);

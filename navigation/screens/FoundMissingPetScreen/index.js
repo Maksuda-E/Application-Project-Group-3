@@ -1,17 +1,8 @@
-import React, { useState } from 'react';
-import { 
-  View, 
-  ScrollView,
-  Text,
-  TextInput,
-  ImageBackground,
-  TouchableOpacity,
-  Alert
-} from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { firestore } from './../../../firebaseConfig';
+import React, {useState} from 'react';
+import {ImageBackground, ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import ImageSelector from '../../../components/ImageSelector/ImageSelector';
 import styles from './styles';
+import * as FileSystem from 'expo-file-system';
 
 const FoundMissingPetScreen = ({navigation}) => {
   const [imageUri, setImageUri] = useState();
@@ -22,11 +13,19 @@ const FoundMissingPetScreen = ({navigation}) => {
   const [contactNumber, setContactNumber] = useState('');
   const [description, setDescription] = useState('');
 
-  function saveToDatabase() {
+  async function saveToDatabase() {
+    const imageType = imageUri.split('.').slice(-1)[0];
+    const fsRead = await FileSystem.readAsStringAsync(
+        imageUri,
+        {
+          encoding: "base64",
+        }
+    );
+    const uploadImageUri = 'data:image/'+imageType+';base64,'+fsRead;
     firestore
       .collection('reportFoundPet')
       .add({
-        imageUri: imageUri,
+        imageUri: uploadImageUri,
         species: species,
         breed: breed,
         dateFound: dateFound,
@@ -46,7 +45,7 @@ const FoundMissingPetScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ImageBackground blurRadius={10} source={ require('../../../assets/data/images/background.jpg') } style={styles.background} >
-        
+
         <ScrollView style={styles.form}>
           <Text style={styles.title}>Report a Found Pet</Text>
 
@@ -56,8 +55,8 @@ const FoundMissingPetScreen = ({navigation}) => {
 
           <View style={styles.smallContainer}>
             <Text style={styles.label}>Species</Text>
-            <TextInput 
-              style={styles.textInputShort} 
+            <TextInput
+              style={styles.textInputShort}
               placeholder='e.g. cat, dog, bird, rabbit'
               onChangeText={(value) => setSpecies(value)}
             />
@@ -65,8 +64,8 @@ const FoundMissingPetScreen = ({navigation}) => {
 
           <View style={styles.smallContainer}>
             <Text style={styles.label}>Breed</Text>
-            <TextInput 
-              style={styles.textInputShort} 
+            <TextInput
+              style={styles.textInputShort}
               placeholder='e.g. Akita, Beagle'
               onChangeText={(value) => setBreed(value)}
             />
@@ -74,8 +73,8 @@ const FoundMissingPetScreen = ({navigation}) => {
 
           <View style={styles.smallContainer}>
             <Text style={styles.label}>Date Found</Text>
-            <TextInput 
-              style={styles.textInputShort} 
+            <TextInput
+              style={styles.textInputShort}
               placeholder='MM/DD/YYYY'
               onChangeText={(value) => setDateFound(value)}
             />
@@ -83,8 +82,8 @@ const FoundMissingPetScreen = ({navigation}) => {
 
           <View style={styles.smallContainer}>
             <Text style={styles.label}>Address</Text>
-            <TextInput 
-              style={styles.textInputShort} 
+            <TextInput
+              style={styles.textInputShort}
               placeholder='Enter the address where the pets was found'
               onChangeText={(value) => setAddress(value)}
             />
@@ -92,8 +91,8 @@ const FoundMissingPetScreen = ({navigation}) => {
 
           <View style={styles.smallContainer}>
             <Text style={styles.label}>Contact Number</Text>
-            <TextInput 
-              style={styles.textInputShort} 
+            <TextInput
+              style={styles.textInputShort}
               placeholder='xxx-xxx-xxxx'
               onChangeText={(value) => setContactNumber(value)}
             />
@@ -101,9 +100,9 @@ const FoundMissingPetScreen = ({navigation}) => {
 
           <View style={styles.smallContainer}>
             <Text style={styles.label}>Description</Text>
-            <TextInput 
-              style={styles.textInputShort} 
-              multiline numberOfLines={5} 
+            <TextInput
+              style={styles.textInputShort}
+              multiline numberOfLines={5}
               placeholder='Enter an additional information'
               onChangeText={(value) => setDescription(value)}
             />
@@ -119,7 +118,7 @@ const FoundMissingPetScreen = ({navigation}) => {
           </View>
 
         </ScrollView>
-        
+
       </ImageBackground>
     </View>
   )
