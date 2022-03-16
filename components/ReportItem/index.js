@@ -14,9 +14,9 @@ const ReportItem = ({ pet }) => {
 
   return (
     <View style={styles.petCareItem}>
-      {/*<View style={styles.leftContainer}>*/}
-      {/*  <Image style={styles.image} source={{ uri: pet.imageUri }} />*/}
-      {/*</View>*/}
+      <View style={styles.leftContainer}>
+        <Image style={styles.image} source={{ uri: pet.imageUri }} />
+      </View>
       <View>
         <Text style={styles.itemTitle}>species:{pet.species}</Text>
           <Text style={styles.itemTitle}>address:{pet.address}</Text>
