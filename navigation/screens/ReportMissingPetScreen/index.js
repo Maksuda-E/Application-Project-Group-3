@@ -13,7 +13,7 @@ import { firestore } from "./../../../firebaseConfig";
 import ImageSelector from "../../../components/ImageSelector/ImageSelector";
 import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-datepicker";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import styles from "./styles";
 
 LogBox.ignoreAllLogs();
