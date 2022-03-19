@@ -2,72 +2,114 @@ import { StyleSheet } from "react-native";
 import Colors from "../../../constants/Colors";
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
-    paddingHorizontal: 30,
-    marginTop: 15,
-  },
   background: {
     width: "100%",
     height: "100%",
     resizeMode: "cover",
   },
+
   title: {
     fontSize: 30,
     fontFamily: "notoserif",
     fontWeight: "bold",
     color: Colors.colors.dark,
-    marginTop: "15%",
-    marginHorizontal: "5%",
+    top: "4%",
     textAlign: "center",
   },
-  lostButton: {
-    width: "40%",
+
+  bodyContainer: {
+    marginTop: 60,
+    flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 15,
-    backgroundColor: Colors.colors.red,
-    borderRadius: 15,
+    marginHorizontal: 20,
+    width: "98%",
   },
-  foundButton: {
-    width: "40%",
-    justifyContent: "center",
+
+  textInput: {
+    marginTop: 3,
+    width: "92%",
+    paddingVertical: 5,
+    paddingLeft: 7,
+    backgroundColor: "#ffffff",
+    marginBottom: 10,
+    // fontSize: 16,
+    borderRadius: 4,
+  },
+
+  cates: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: Colors.colors.dark,
+  },
+
+  btnContainer: {
+    display: "flex",
+    marginTop: 15,
+    marginRight: 15,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "93%",
+    paddingHorizontal: 30,
+  },
+
+  imageContainer: {
+    marginBottom: 10,
+    alignSelf: "center",
+    width: 390,
+  },
+
+  button: {
     alignItems: "center",
-    paddingVertical: 10,
     backgroundColor: Colors.colors.dark,
+    padding: 10,
+    marginBottom: 25,
     borderRadius: 15,
+    width: "40%",
   },
-  buttonText: {
+
+  cancelBtn: {
+    alignItems: "center",
+    backgroundColor: Colors.colors.red,
+    padding: 10,
+    marginBottom: 25,
+    borderRadius: 15,
+    width: "40%",
+  },
+
+  btnText: {
     color: "white",
-    fontSize: 18,
+    fontSize: 16,
   },
-  form: {
-    paddingHorizontal: 13,
-  },
-  label: {
+
+  btnSubmit: {
+    color: "white",
     fontSize: 16,
     fontWeight: "bold",
-    color: Colors.colors.dark,
-    paddingBottom: 2,
-    paddingLeft: 3,
   },
-  textInputShort: {
-    paddingVertical: 5,
-    backgroundColor: "#ffffff",
-    borderRadius: 4,
-    textAlignVertical: "center",
-    paddingLeft: 7,
-    paddingTop: 2,
+
+  noticeStart: {
+    fontSize: 18,
+    color: Colors.colors.light,
+    fontWeight: "600",
+    fontStyle: "italic",
   },
-  imageContainer: {
-    marginTop: 15,
+
+  noticeTxt: {
+    fontSize: 14,
+    color: Colors.colors.light,
     marginBottom: 15,
-    alignSelf: "center",
   },
-  smallContainer: {
-    marginBottom: 8,
+
+  datePickerStyle: {
+    marginTop: 3,
+    width: "92%",
+    paddingVertical: 2,
+    paddingLeft: 7,
+    paddingRight: 7,
+    backgroundColor: "#ffffff",
+    marginBottom: 10,
+    fontSize: 16,
+    borderRadius: 4,
   },
 });
 
