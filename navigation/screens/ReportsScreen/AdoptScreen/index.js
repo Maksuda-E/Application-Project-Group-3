@@ -4,7 +4,7 @@ import {
     Text,
     ImageBackground,
     ScrollView,
-    Pressable,
+    TouchableOpacity,
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -12,27 +12,24 @@ import styles from './styles';
 import ReportItem from "../../../../components/ReportItem";
 import { firestore } from "../../../../firebaseConfig";
 
-const FoundPetReports = ({ navigation }) => {
+const AdoptScreen = ({ navigation }) => {
     let [foundpets, setFoundpets] = useState([]);
 
     useEffect(() => {
         const subscriber = async () => {
             try {
                 let result = [];
-                // let data = await firestore.collection('missingPets').get();
                 let data = await firestore.collection('reportFoundPet').get();
 
                 data.forEach(e => {
+                    let foundDate = new Date(e.data().dateFound);
+                    const today = new Date();
 
-                    // if (e.id) {
-                    //     result.push({
-                    //         id: e.id,
-                    //         type: e.data().type,
-                    //         breed: e.data().breed,
-                    //         description: e.data().description,
-                    //     });
-                    // }
-                    if (e.id) {
+                    const diffTime = Math.abs(today - foundDate);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                    console.log(diffDays);
+
+                    if (diffDays >= 30) {
                         result.push({
                             id: e.id,
                             address: e.data().address,
@@ -58,16 +55,14 @@ const FoundPetReports = ({ navigation }) => {
             <ImageBackground source={require('../../../../assets/data/images/background.jpg')} style={styles.background} >
                 <Text style={styles.title}>Report</Text>
 
-                <Text style={styles.subTitle}>Found Pets List</Text>
-                <View style={{ marginHorizontal: '5%'}}>
-                    <Text>There are many homeless pets that need your help. You felt in love with our pets and want to give them a home?
-                        <Text style={styles.adoptText} onPress={() => navigation.navigate("AdoptReports")}> Click here to adopt a pet!</Text>
-                    </Text>
-                </View>
+                <Text style={styles.subTitle}>Pets looking for a home</Text>
                 <ScrollView>
                     {
                         foundpets.map((pet) =>
-                            <ReportItem key={pet.id} pet={pet} />)
+                            <TouchableOpacity key={pet.id} pet={pet} onPress={() => navigation.navigate("AdoptForm")}>
+                                <ReportItem pet={pet} />
+                            </TouchableOpacity>
+                        )
                     }
                 </ScrollView>
 
@@ -76,4 +71,4 @@ const FoundPetReports = ({ navigation }) => {
     )
 };
 
-export default FoundPetReports;
+export default AdoptScreen;

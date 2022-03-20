@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ReportsScreen from './screens/ReportsScreen'
 import MissingPetReports from './screens/ReportsScreen/MissingPetReports';
 import FoundPetReports from './screens/ReportsScreen/FoundPetReports';
+import AdoptScreen from './screens/ReportsScreen/AdoptScreen';
+import AdoptForm from './screens/ReportsScreen/AdoptScreen/AdoptForm';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +22,16 @@ const ReportsNavigator = () => {
       <Stack.Screen 
         name="MissingPetReports"
         component={MissingPetReports}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen 
+        name="AdoptReports"
+        component={AdoptScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen 
+        name="AdoptForm"
+        component={AdoptForm}
         options={{ headerShown: false }}
       />
       <Stack.Screen 
