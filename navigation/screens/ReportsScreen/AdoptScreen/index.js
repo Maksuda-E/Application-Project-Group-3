@@ -27,7 +27,6 @@ const AdoptScreen = ({ navigation }) => {
 
                     const diffTime = Math.abs(today - foundDate);
                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-                    console.log(diffDays);
 
                     if (diffDays >= 30) {
                         result.push({
@@ -59,7 +58,7 @@ const AdoptScreen = ({ navigation }) => {
                 <ScrollView>
                     {
                         foundpets.map((pet) =>
-                            <TouchableOpacity key={pet.id} pet={pet} onPress={() => navigation.navigate("AdoptForm")}>
+                            <TouchableOpacity key={pet.id} pet={pet} onPress={() => navigation.navigate("AdoptForm", {id: pet.id})}>
                                 <ReportItem pet={pet} />
                             </TouchableOpacity>
                         )

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -21,7 +21,7 @@ import * as FileSystem from "expo-file-system";
 LogBox.ignoreAllLogs();
 DropDownPicker.setListMode("SCROLLVIEW");
 
-const AdoptForm = ({ navigation }, pet) => {
+const AdoptForm = ({ navigation, route }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -67,6 +67,7 @@ const AdoptForm = ({ navigation }, pet) => {
       firestore
         .collection("adoptRequests")
         .add({
+          id: route.params.id,
           name,
           phone,
           address,
