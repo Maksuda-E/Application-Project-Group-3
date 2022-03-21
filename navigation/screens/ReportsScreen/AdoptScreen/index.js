@@ -31,11 +31,14 @@ const AdoptScreen = ({ navigation }) => {
                     if (diffDays >= 30) {
                         result.push({
                             id: e.id,
+                            petName: e.data().petName,
                             address: e.data().address,
                             breed: e.data().breed,
-                            contactNumber: e.data().contactNumber,
+                            contactName: e.data().contactName,
+                            contactPhone: e.data().contactPhone,
+                            isChip: e.data().isChip,
+                            gender: e.data().gender,
                             dateFound: e.data().dateFound,
-                            description: e.data().description,
                             imageUri: e.data().imageUri,
                             species: e.data().species,
                         });

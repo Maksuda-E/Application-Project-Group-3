@@ -16,15 +16,19 @@ const ReportLostItem = ({ pet }) => {
     <View style={styles.petCareItem}>
       <View style={styles.leftContainer}>
         <Image style={styles.image} source={{ uri: pet.image }} />
+        <Text>{'\n'}</Text>
+        <Image style={styles.image} source={{ uri: pet.petImage }} />
       </View>
       <View>
-        <Text style={styles.itemTitle}>species:{pet.species}</Text>
-          <Text style={styles.itemTitle}>petName:{pet.petName}</Text>
-        <Text style={styles.itemTitle}>colour:{pet.colour}</Text>
-        <Text style={styles.itemTitle}>contactInfo:{pet.contactInfo}</Text>
-        <Text style={styles.itemTitle}>isChip:{pet.isChip}</Text>
-        <Text style={styles.itemTitle}>Gender:{pet.Gender}</Text>
-        <Text style={styles.itemTitle}>dateLost:{pet.dateLost}</Text>
+      <Text style={styles.itemTitle}>Pet Name:{pet.petName}</Text>
+      <Text style={styles.itemTitle}>Date Lost:{pet.dateLost}</Text>
+      <Text style={styles.itemTitle}>Species:{pet.species}</Text>
+      <Text style={styles.itemTitle}>Gender:{pet.gender}</Text>
+      <Text style={styles.itemTitle}>Breed:{pet.breed}</Text>
+      <Text style={styles.itemTitle}>Is there a microchip:{pet.isChip}</Text>
+      <Text style={styles.itemTitle}>Address:{pet.address.title}</Text>
+      <Text style={styles.itemTitle}>Contact Info:{pet.contactName}</Text>
+      <Text style={styles.itemTitle}>Phone Number:{pet.contactPhone}</Text>
       </View>
     </View>
   )
