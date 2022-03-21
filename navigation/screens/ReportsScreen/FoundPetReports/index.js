@@ -21,6 +21,7 @@ const FoundPetReports = ({ navigation }) => {
                 let result = [];
                 // let data = await firestore.collection('missingPets').get();
                 let data = await firestore.collection('reportFoundPet').get();
+                // console.log(data);
 
                 data.forEach(e => {
 
@@ -35,13 +36,16 @@ const FoundPetReports = ({ navigation }) => {
                     if (e.id) {
                         result.push({
                             id: e.id,
-                            address: e.data().address,
+                            // address: e.data().address,
                             breed: e.data().breed,
-                            contactNumber: e.data().contactNumber,
+                            // contactNumber: e.data().contactNumber,
+                            contactName: e.data().contactName,
+                            contactPhone: e.data().contactPhone,
                             dateFound: e.data().dateFound,
-                            description: e.data().description,
+                            gender: e.data().gender,
+                            // description: e.data().description,
                             imageUri: e.data().imageUri,
-                            species: e.data().species,
+                            // species: e.data().species,
                         });
                     }
                 })

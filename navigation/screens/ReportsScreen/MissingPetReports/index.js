@@ -16,10 +16,10 @@ const MissingPetReports = ({navigation}) => {
     useEffect(() => {
         const subscriber = async () => {
             try {
-                result = [];
+                let result = [];
 
                 // data = await firestore.collection('foundPets').get();
-                data = await firestore.collection('reportLostPet').get();
+                let data = await firestore.collection('reportLostPet').get();
 
                 data.forEach(e => {
 
