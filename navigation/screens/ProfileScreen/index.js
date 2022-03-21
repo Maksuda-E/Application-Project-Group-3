@@ -51,56 +51,29 @@ const ProfileScreen = ({navigation}) => {
 
   return (
     <View>
-     <ImageBackground source={ require('../../../assets/data/images/background.jpg') } 
-      style={styles.background} >
+    <ImageBackground source={ require('../../../assets/data/images/background.jpg') } style={styles.background} >
       <Text style={styles.title}>Profile</Text>
-      <TouchableOpacity onPress={handleSignOut}>
-          <Text style={styles.buttonText}>Sign out</Text>
-       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Edit Profile')}>
-          <Text style={styles.buttonText1}>Update Profile</Text>
-       </TouchableOpacity>
-      <View style={styles.container}>  
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.signout} activeOpacity={0.8} onPress={handleSignOut}>
+          <Text style={styles.buttonText}>Sign Out</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.editprofile} activeOpacity={0.8} onPress={() => navigation.navigate("Edit Profile")}>
+          <Text style={styles.buttonText}>Update Profile</Text>
+        </TouchableOpacity>
+      </View>
+      <ScrollView style={styles.container}> 
        <Text>{"\n"}{"\n"}</Text>
        <View style={styles.inputContainer} >
         <Image style={styles.image} source={{ uri: image }}/>
-        <TextInput
-          style={styles.textInput}
-          placeholder="First Name"
-          numberOfLines={3}
-          onChangeText={(value) => setFirstName(value) }
-          value={firstname}
-          style={{ borderBottomWidth: 0.5, borderBottomColor: 'gray' }}
-        />
-       <TextInput
-          style={styles.textInput}
-          placeholder="Last Name"
-          numberOfLines={3}
-          onChangeText={(value) => setLastName(value) }
-          value={lastname}
-          style={{ borderBottomWidth: 0.5, borderBottomColor: 'gray' }}
-        />
-       <TextInput
-         style={styles.textInput}
-         placeholder="Present Address"
-         numberOfLines={3}
-         onChangeText={(value) => setAddress(value) }
-         value={address}
-         style={{ borderBottomWidth: 0.5, borderBottomColor: 'gray' }}
-        />
-       <TextInput
-         style={styles.textInput}
-         placeholder="Contact Number"
-         numberOfLines={3}
-         onChangeText={(value) => setContact(value) }
-         value={contactnumber}
-        style={{ borderBottomWidth: 0.5, borderBottomColor: 'gray' }}
-       />
+        <Text style={styles.textInput}>First Name: {firstname}</Text>
+        <Text style={styles.textInput}>Last Name: {lastname}</Text>
+        <Text style={styles.textInput}>Address: {address}</Text>
+        <Text style={styles.textInput}>Contact Number: {contactnumber}</Text>
      </View>
-   </View>
- </ImageBackground>
- </View>
-  )
+   </ScrollView>
+    </ImageBackground>
+  </View>
+)
 };
 
 export default ProfileScreen;

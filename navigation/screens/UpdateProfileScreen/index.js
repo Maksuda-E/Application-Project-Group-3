@@ -125,7 +125,6 @@ const UpdateProfile = ({navigation}) => {
               numberOfLines={3}
               onChangeText={(value) => setFirstName(value) }
               value={firstname}
-              style={{ borderBottomWidth: 0.5, borderBottomColor: 'gray' }}
             />
            <TextInput
               style={styles.textInput}
@@ -133,7 +132,6 @@ const UpdateProfile = ({navigation}) => {
               numberOfLines={3}
               onChangeText={(value) => setLastName(value) }
               value={lastname}
-              style={{ borderBottomWidth: 0.5, borderBottomColor: 'gray' }}
             />
            <TextInput
              style={styles.textInput}
@@ -141,7 +139,6 @@ const UpdateProfile = ({navigation}) => {
              numberOfLines={3}
              onChangeText={(value) => setAddress(value) }
              value={address}
-             style={{ borderBottomWidth: 0.5, borderBottomColor: 'gray' }}
             />
            <TextInput
              style={styles.textInput}
@@ -149,7 +146,6 @@ const UpdateProfile = ({navigation}) => {
              numberOfLines={3}
              onChangeText={(value) => setContact(value) }
              value={contactnumber}
-            style={{ borderBottomWidth: 0.5, borderBottomColor: 'gray' }}
            />
          </View>
          {!saveButton &&

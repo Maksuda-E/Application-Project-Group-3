@@ -120,7 +120,7 @@ const MissingPetReports = ({navigation}) => {
                             breed: e.data().breed,
                             contactName: e.data().contactName,
                             contactPhone: e.data().contactPhone,
-                            dateFound: e.data().dateFound,
+                            dateLost: e.data().dateLost,
                             gender: e.data().gender,
                             image: e.data().image,
                             petImage: e.data().petImage,
