@@ -114,7 +114,7 @@ const AdoptForm = ({ navigation, route }) => {
           source={require("../../../../../assets/data/images/background.jpg")}
           style={styles.background}
         >
-          <Text style={styles.title}>Report Missing Pet</Text>
+          <Text style={styles.title}>Adopt Pet</Text>
 
           <View style={styles.bodyContainer}>
 
