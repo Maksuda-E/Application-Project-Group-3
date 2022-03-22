@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
   },
   itemTitle: {
-    fontSize: 18,
+    fontSize: 13,
     color: Colors.colors.dark,
     fontWeight: 'bold',
   },

@@ -5,22 +5,21 @@ import {
     ImageBackground,
     ScrollView,
     Pressable,
+    TextInput,
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import styles from './styles';
 import ReportItem from "../../../../components/ReportItem";
 import { firestore } from "../../../../firebaseConfig";
 
 const FoundPetReports = ({ navigation }) => {
     let [foundpets, setFoundpets] = useState([]);
-
     useEffect(() => {
-        const subscriber = async () => {
-            try {
-                let result = [];
-                // let data = await firestore.collection('missingPets').get();
-                let data = await firestore.collection('reportFoundPet').get();
+      const subscriber = async () => {
+        try {
+            let result = [];
+            // let data = await firestore.collection('missingPets').get();
+            let data = await firestore.collection('reportFoundPet').get();
 
                 data.forEach(e => {
 
@@ -35,13 +34,16 @@ const FoundPetReports = ({ navigation }) => {
                     if (e.id) {
                         result.push({
                             id: e.id,
+                            petName: e.data().petName,
+                            species: e.data().species,
                             address: e.data().address,
                             breed: e.data().breed,
-                            contactNumber: e.data().contactNumber,
+                            contactName: e.data().contactName,
+                            contactPhone: e.data().contactPhone,
                             dateFound: e.data().dateFound,
-                            description: e.data().description,
+                            gender: e.data().gender,
+                            isChip: e.data().isChip,
                             imageUri: e.data().imageUri,
-                            species: e.data().species,
                         });
                     }
                 })
@@ -53,6 +55,8 @@ const FoundPetReports = ({ navigation }) => {
         }
         subscriber();
     }, []);
+
+
     return (
         <View style={styles.container}>
             <ImageBackground source={require('../../../../assets/data/images/background.jpg')} style={styles.background} >

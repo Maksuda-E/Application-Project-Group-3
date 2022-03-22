@@ -12,6 +12,7 @@ import {
 import { firestore } from "./../../../firebaseConfig";
 import ImageSelector from "../../../components/ImageSelector/ImageSelector";
 import DropDownPicker from "react-native-dropdown-picker";
+import { AutocompleteDropdown } from 'react-native-autocomplete-dropdown';
 import DatePicker from "react-native-datepicker";
 // import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import styles from "./styles";
@@ -56,6 +57,14 @@ const ReportMissingPetScreen = ({ navigation }) => {
     { label: "Yes", value: "yes" },
     { label: "No", value: "no" },
   ]);
+
+  const [addressOpen, setaddressOpen] = useState(false);
+
+  const onAddressOpen = useCallback(() => {
+    setGenderOpen(false);
+    setChipOpen(false);
+    setSpeciesOpen(false);
+  }, []);
 
   const onSpeciesOpen = useCallback(() => {
     setGenderOpen(false);
@@ -303,12 +312,41 @@ const ReportMissingPetScreen = ({ navigation }) => {
             </View>
 
             <Text style={styles.cates}>Address</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Where did you lose the pet?"
-              value={address}
-              onChangeText={(value) => setAddress(value)}
-            />
+            <View
+            style={{
+              width: "92%",
+              marginBottom: 7,
+              marginTop: 2,
+            }}
+            >
+            <AutocompleteDropdown 
+            style={styles.autocomplete}
+            zIndex={1000}
+            zIndexInverse={3000}
+            multiline={true}
+            textInputProps={{
+              placeholder: "Where did you lose the pet?",
+              placeholderTextColor: "grey",
+              style: {
+              backgroundColor: "white",
+              fontSize: 14,
+              }
+            }}
+            value={address}
+            open={addressOpen}
+            onOpen={onAddressOpen}
+            setOpen={setaddressOpen}
+            onSelectItem={setAddress}
+            dataSet={[
+              { id: '1', title: '3345 Paul Drive, Ottawa, Ontario, K2F3S2' },
+              { id: '2', title: '190 Stonway, London, Ontario, J2FGH2' },
+              { id: '3', title: '4521 St. Paul Street, St Catharines, Ontario, L2S 3A1'},
+              { id: '4', title: '2428 Rayborn Crescent, St Albert, Alberta, T8N 1C7'},
+              { id: '5', title: '1030 rue de la Gauchetière, Montreal, Quebec, H3B 2M3'},
+              { id: '6', title: '2511 Weir Crescent, Toronto, Ontario, M1E 3T8'},
+            ]}
+          />
+        </View>
 
             <Text style={styles.cates}>Contact Info</Text>
             <TextInput

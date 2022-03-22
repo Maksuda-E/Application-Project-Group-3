@@ -18,12 +18,16 @@ const ReportItem = ({ pet }) => {
         <Image style={styles.image} source={{ uri: pet.imageUri }} />
       </View>
       <View>
-        <Text style={styles.itemTitle}>species:{pet.species}</Text>
-          <Text style={styles.itemTitle}>address:{pet.address}</Text>
-          <Text style={styles.itemTitle}>contactNumber:{pet.contactNumber}</Text>
-          <Text style={styles.itemTitle}>breed:{pet.breed}</Text>
-          <Text style={styles.itemTitle}>dateFound:{pet.dateFound}</Text>
-        <Text style={styles.itemTitle}>description:{pet.description}</Text>
+      <Text style={styles.itemTitle}>Pet Name:{pet.petName}</Text>
+      <Text style={styles.itemTitle}>Date Found:{pet.dateFound}</Text>
+      <Text style={styles.itemTitle}>Species:{pet.species}</Text>
+      <Text style={styles.itemTitle}>Gender:{pet.gender}</Text>
+      <Text style={styles.itemTitle}>Breed:{pet.breed}</Text>
+      <Text style={styles.itemTitle}>Is there a microchip:{pet.isChip}</Text>
+      <Text style={styles.itemTitle}>Address:{pet.address.title}</Text>
+      <Text style={styles.itemTitle}>Contact Info:{pet.contactName}</Text>
+      <Text style={styles.itemTitle}>Phone Number:{pet.contactPhone}</Text>
+        
       </View>
     </View>
   )

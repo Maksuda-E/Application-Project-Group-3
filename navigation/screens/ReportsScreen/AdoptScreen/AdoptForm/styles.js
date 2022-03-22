@@ -114,7 +114,12 @@ const styles = StyleSheet.create({
   error: {
     color: "red",
     fontStyle: "italic",
-  }
+  },
+  autocomplete: {
+    borderColor: "transparent",
+    height: 30,
+    borderRadius: 6,
+  },
 });
 
 export default styles;

@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
   },
   container: {
     width: '90%',
-    height: '75%',
+    height: '100%',
+    borderColor: 'black',
     position: 'absolute',
     top: '20%',
     backgroundColor: "white",
@@ -32,24 +33,23 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginLeft: 20,
     },
-image:{
+   image:{
     width: 150,
     height: 150,
     marginLeft: '25%',
-    marginTop: '20%',
-},
-textInput: {
-    borderColor: '#ccc',
-    borderWidth: 1,
-    marginBottom: 15,
-    paddingVertical: 4,
-    paddingHorizontal: 2,
-    textAlignVertical: 'top',
+    marginTop: '10%',
+   },
+  textInput: {
+  borderColor: '#ccc',
+  textAlignVertical: 'top',
+  borderBottomWidth: 0.5, 
+  color: '#808080',
+  fontSize: 14
 },
 buttonContainer:{
   paddingLeft: 40,
   paddingRight: 40,
-  marginTop: 10,
+  marginTop: 8,
   flexDirection: 'row',
   justifyContent: 'space-between'
    },

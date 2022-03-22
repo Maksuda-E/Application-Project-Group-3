@@ -52,7 +52,16 @@ const styles = StyleSheet.create({
   },
   adoptText: {
     color: Colors.colors.theme,
-  }
+  },
+  textInput: {
+    marginTop: 3,
+    width: "92%",
+    paddingVertical: 5,
+    paddingLeft: 7,
+    backgroundColor: "#ffffff",
+    marginBottom: 10,
+    borderRadius: 4,
+  },
 });
 
 export default styles;

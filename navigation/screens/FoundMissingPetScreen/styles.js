@@ -111,6 +111,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderRadius: 4,
   },
+  autocomplete: {
+    borderColor: "transparent",
+    height: 30,
+    borderRadius: 6,
+  },
 });
 
 export default styles;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,7 @@ import DatePicker from "react-native-datepicker";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import styles from "./styles";
 import * as FileSystem from "expo-file-system";
+import { AutocompleteDropdown } from 'react-native-autocomplete-dropdown'
 
 LogBox.ignoreAllLogs();
 DropDownPicker.setListMode("SCROLLVIEW");
@@ -35,6 +36,14 @@ const AdoptForm = ({ navigation, route }) => {
     { label: "Yes", value: true },
     { label: "No", value: false },
   ]);
+
+  const [addressOpen, setaddressOpen] = useState(false);
+
+  const onAddressOpen = useCallback(() => {
+    setGenderOpen(false);
+    setChipOpen(false);
+    setSpeciesOpen(false);
+  }, []);
 
   async function uploadData() {
     let error = [];
@@ -138,13 +147,44 @@ const AdoptForm = ({ navigation, route }) => {
               onChangeText={(value) => setPhone(value)}
             />
 
-            <Text style={styles.cates}>Address:</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Your address"
-              value={address}
-              onChangeText={(value) => setAddress(value)}
-            />
+           <Text style={styles.cates}>Address</Text>
+            <View
+            style={{
+              width: "92%",
+              marginBottom: 7,
+              marginTop: 2,
+            }}
+            >
+            <AutocompleteDropdown 
+            style={styles.autocomplete}
+            zIndex={1000}
+            zIndexInverse={3000}
+            multiline={true}
+            textInputProps={{
+              placeholder: "Enter your address",
+              placeholderTextColor: "grey",
+              style: {
+              backgroundColor: "white",
+              fontSize: 14,
+              }
+            }}
+
+            value={address}
+            open={addressOpen}
+            onOpen={onAddressOpen}
+            setOpen={setaddressOpen}
+            onSelectItem={setAddress}
+            dataSet={[
+              { id: '1', title: '3345 Paul Drive, Ottawa, Ontario, K2F3S2' },
+              { id: '2', title: '190 Stonway, London, Ontario, J2FGH2' },
+              { id: '3', title: '4521 St. Paul Street, St Catharines, Ontario, L2S 3A1'},
+              { id: '4', title: '2428 Rayborn Crescent, St Albert, Alberta, T8N 1C7'},
+              { id: '5', title: '1030 rue de la Gauchetière, Montreal, Quebec, H3B 2M3'},
+              { id: '6', title: '2511 Weir Crescent, Toronto, Ontario, M1E 3T8'},
+            ]}
+          />
+        </View>
+          
 
             <Text style={styles.cates}>Reason:</Text>
             <TextInput

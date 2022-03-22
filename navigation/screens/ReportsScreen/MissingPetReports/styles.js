@@ -49,6 +49,22 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 18,
+  },
+  cates: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: Colors.colors.dark,
+    paddingLeft: 18
+  },
+  dropdown: {
+    borderColor: "grey",
+    height: 40,
+    borderRadius: 6,
+  },
+  text:{
+    paddingLeft: 5,
+    paddingRight: 5,
+    paddingTop: 8
   }
 });
 
