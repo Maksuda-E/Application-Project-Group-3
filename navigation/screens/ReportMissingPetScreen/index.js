@@ -339,7 +339,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
             onSelectItem={setAddress}
             dataSet={[
               { id: '1', title: '3345 Paul Drive, Ottawa, Ontario, K2F3S2' },
-              { id: '2', title: '190 Stonway, London, Ontario, J2FGH2' },
+              { id: '2', title: '190 Clarence, London, Ontario, J2FGH2' },
               { id: '3', title: '4521 St. Paul Street, St Catharines, Ontario, L2S 3A1'},
               { id: '4', title: '2428 Rayborn Crescent, St Albert, Alberta, T8N 1C7'},
               { id: '5', title: '1030 rue de la Gauchetière, Montreal, Quebec, H3B 2M3'},
