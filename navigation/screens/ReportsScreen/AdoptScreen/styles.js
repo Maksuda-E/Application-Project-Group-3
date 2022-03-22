@@ -49,7 +49,13 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 18,
-  }
+  },
+  noticeTxt: {
+    fontSize: 14,
+    color: Colors.colors.dark,
+    marginBottom: 15,
+    marginLeft: '5%',
+  },
 });
 
 export default styles;

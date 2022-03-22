@@ -117,11 +117,6 @@ const AdoptForm = ({ navigation, route }) => {
           <Text style={styles.title}>Report Missing Pet</Text>
 
           <View style={styles.bodyContainer}>
-            <View>
-              <Text style={styles.noticeTxt}>
-                Click on the pet you want to adopt to proceed.
-              </Text>
-            </View>
 
             <View style={{marginBottom: '2%'}}>
               {errorMessage && 
