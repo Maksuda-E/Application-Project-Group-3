@@ -17,7 +17,6 @@ const ReportLostItem = ({ pet }) => {
       <View style={styles.leftContainer}>
         <Image style={styles.image} source={{ uri: pet.image }} />
         <Text>{'\n'}</Text>
-        <Image style={styles.image} source={{ uri: pet.petImage }} />
       </View>
       <View>
       <Text style={styles.itemTitle}>Pet Name:{pet.petName}</Text>

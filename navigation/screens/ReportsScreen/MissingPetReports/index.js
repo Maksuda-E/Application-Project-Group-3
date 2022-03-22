@@ -78,7 +78,7 @@ const MissingPetReports = ({navigation}) => {
                             gender: e.data().gender,
                             isChip: e.data().isChip,
                             image: e.data().image,
-                            petImage: e.data().petImage,
+                            //petImage: e.data().petImage,
                         });
                     }
                 })
