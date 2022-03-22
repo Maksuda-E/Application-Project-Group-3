@@ -40,6 +40,14 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  iconsContainer: {
+    flexDirection: "row",
+    marginTop: 5,
+    marginLeft: 100
+  },
+  icons: {
+    marginHorizontal: 7
   }
 });
 
