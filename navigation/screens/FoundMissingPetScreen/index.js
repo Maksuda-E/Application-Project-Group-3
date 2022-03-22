@@ -7,6 +7,7 @@ import {
   TouchableOpacity, 
   View, 
   SafeAreaView, 
+  Alert,
   LogBox
 } from 'react-native';
 import { firestore } from "./../../../firebaseConfig";
@@ -103,7 +104,7 @@ const FoundMissingPetScreen = ({navigation}) => {
         contactPhone: contactPhone
       })
       .then(() => {
-        Alert.alert('Data has been uploaded successfully!');
+        Alert.alert('Thank you for your contribution to find pet of others!');
       })
       .catch(function(error) {
         Alert.alert("Something went wrong!");

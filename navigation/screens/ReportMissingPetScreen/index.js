@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ScrollView,
+  Alert,
   LogBox,
 } from "react-native";
 import { firestore } from "./../../../firebaseConfig";
@@ -116,6 +117,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
           contactPhone: contactPhone,
         })
         .then(() => {
+          Alert.alert("Thanks for reporting! Hope you will find your pet soon.")
           console.log("Data has been uploaded successfully!");
         })
         .catch(function (error) {
