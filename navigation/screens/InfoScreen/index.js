@@ -54,6 +54,7 @@ const InfoScreen = ({ navigation }) => {
               name: e.data().name,
               image: e.data().image,
               address: e.data().address,
+              openingHours: e.data().openingHours,
               state: e.data().state,
               phone: e.data().phone,
             });

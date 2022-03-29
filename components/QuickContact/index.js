@@ -27,6 +27,7 @@ const QuickContact = ({ contact }) => {
       <View>
         <Text style={styles.itemTitle}>{contact.name}</Text>
         <Text style={styles.state}>{contact.address}{"\n"}{contact.state}</Text>
+        <Text style={styles.state}>Opening hours: {contact.openingHours}</Text>
         <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => triggerCall(contact.phone)}>
           <Text style={styles.buttonText}>Call now</Text>
         </TouchableOpacity>
