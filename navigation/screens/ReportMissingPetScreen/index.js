@@ -13,11 +13,13 @@ import {
 import { firestore } from "./../../../firebaseConfig";
 import ImageSelector from "../../../components/ImageSelector/ImageSelector";
 import DropDownPicker from "react-native-dropdown-picker";
-import { AutocompleteDropdown } from 'react-native-autocomplete-dropdown';
+import { AutocompleteDropdown } from "react-native-autocomplete-dropdown";
 import DatePicker from "react-native-datepicker";
 // import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import styles from "./styles";
 import * as FileSystem from "expo-file-system";
+// import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 LogBox.ignoreAllLogs();
 DropDownPicker.setListMode("SCROLLVIEW");
@@ -83,47 +85,40 @@ const ReportMissingPetScreen = ({ navigation }) => {
   }, []);
 
   async function uploadData() {
+    const petImageType = petImage.split(".").slice(-1)[0];
+    let fsRead = await FileSystem.readAsStringAsync(petImage, {
+      encoding: "base64",
+    });
+    const uploadPetImage = "data:image/" + petImageType + ";base64," + fsRead;
 
-    const petImageType = petImage.split('.').slice(-1)[0];
-    let fsRead = await FileSystem.readAsStringAsync(
-        petImage,
-        {
-          encoding: "base64",
-        }
-    );
-    const uploadPetImage = 'data:image/' + petImageType + ';base64,' + fsRead;
-
-    const imageType = image.split('.').slice(-1)[0];
-    fsRead = await FileSystem.readAsStringAsync(
-        image,
-        {
-          encoding: "base64",
-        }
-    );
-    const uploadImage = 'data:image/' + imageType + ';base64,' + fsRead;
+    const imageType = image.split(".").slice(-1)[0];
+    fsRead = await FileSystem.readAsStringAsync(image, {
+      encoding: "base64",
+    });
+    const uploadImage = "data:image/" + imageType + ";base64," + fsRead;
     firestore
-        .collection("reportLostPet")
-        .add({
-          petImage: uploadPetImage,
-          image: uploadImage,
-          petName: petName,
-          dateLost: dateLost,
-          species: species,
-          gender: gender,
-          breed: breed,
-          isChip: isChip,
-          address: address,
-          contactName: contactName,
-          contactPhone: contactPhone,
-        })
-        .then(() => {
-          Alert.alert("Thanks for reporting! Hope you will find your pet soon.")
-          console.log("Data has been uploaded successfully!");
-        })
-        .catch(function (error) {
-          Alert.alert("Something went wrong!");
-          console.log("Error: ", error);
-        });
+      .collection("reportLostPet")
+      .add({
+        petImage: uploadPetImage,
+        image: uploadImage,
+        petName: petName,
+        dateLost: dateLost,
+        species: species,
+        gender: gender,
+        breed: breed,
+        isChip: isChip,
+        address: address,
+        contactName: contactName,
+        contactPhone: contactPhone,
+      })
+      .then(() => {
+        Alert.alert("Thanks for reporting! Hope you will find your pet soon.");
+        console.log("Data has been uploaded successfully!");
+      })
+      .catch(function (error) {
+        Alert.alert("Something went wrong!");
+        console.log("Error: ", error);
+      });
 
     // remove the field's data
     setPetImage(null);
@@ -156,7 +151,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
                 1. All fields below are required.{"\n"}2. To make sure we don't
                 make mistake your pet in the future, please{" "}
                 <Text style={{ color: "#FB9A44" }}>
-                  upload a photo of yourself with your pet
+                  upload the document of pet proof
                 </Text>
                 .
               </Text>
@@ -170,11 +165,25 @@ const ReportMissingPetScreen = ({ navigation }) => {
               />
             </View>
 
-            <Text style={styles.cates}>YOUR PHOTO WITH PET</Text>
+            {/* <Text style={styles.cates}>YOUR PHOTO WITH PET</Text>
             <View style={styles.imageContainer}>
               <ImageSelector
                 imageUri={image}
                 onChangeImage={(uri) => setImage(uri)}
+              />
+            </View> */}
+
+            <View style={styles.uploadDoc}>
+              <Text style={styles.cates}>
+                {/* Please upload the proof document here */}
+                UPLOAD THE PROOF DOCUMENT
+              </Text>
+              {/* <AntDesign name="cloudupload" size={46} color="darkgreen" /> */}
+              <FontAwesome5
+                name="cloud-upload-alt"
+                size={48}
+                color="darkgreen"
+                style={{ marginTop: 18 }}
               />
             </View>
 
@@ -315,40 +324,57 @@ const ReportMissingPetScreen = ({ navigation }) => {
 
             <Text style={styles.cates}>Address</Text>
             <View
-            style={{
-              width: "92%",
-              marginBottom: 7,
-              marginTop: 2,
-            }}
+              style={{
+                width: "92%",
+                marginBottom: 7,
+                marginTop: 2,
+              }}
             >
-            <AutocompleteDropdown 
-            style={styles.autocomplete}
-            zIndex={1000}
-            zIndexInverse={3000}
-            multiline={true}
-            textInputProps={{
-              placeholder: "Where did you lose the pet?",
-              placeholderTextColor: "grey",
-              style: {
-              backgroundColor: "white",
-              fontSize: 14,
-              }
-            }}
-            value={address}
-            open={addressOpen}
-            onOpen={onAddressOpen}
-            setOpen={setaddressOpen}
-            onSelectItem={setAddress}
-            dataSet={[
-              { id: '1', title: '3345 Paul Drive, Ottawa, Ontario, K2F3S2' },
-              { id: '2', title: '190 Clarence, London, Ontario, J2FGH2' },
-              { id: '3', title: '4521 St. Paul Street, St Catharines, Ontario, L2S 3A1'},
-              { id: '4', title: '2428 Rayborn Crescent, St Albert, Alberta, T8N 1C7'},
-              { id: '5', title: '1030 rue de la Gauchetière, Montreal, Quebec, H3B 2M3'},
-              { id: '6', title: '2511 Weir Crescent, Toronto, Ontario, M1E 3T8'},
-            ]}
-          />
-        </View>
+              <AutocompleteDropdown
+                style={styles.autocomplete}
+                zIndex={1000}
+                zIndexInverse={3000}
+                multiline={true}
+                textInputProps={{
+                  placeholder: "Where did you lose the pet?",
+                  placeholderTextColor: "grey",
+                  style: {
+                    backgroundColor: "white",
+                    fontSize: 14,
+                  },
+                }}
+                value={address}
+                open={addressOpen}
+                onOpen={onAddressOpen}
+                setOpen={setaddressOpen}
+                onSelectItem={setAddress}
+                dataSet={[
+                  {
+                    id: "1",
+                    title: "3345 Paul Drive, Ottawa, Ontario, K2F3S2",
+                  },
+                  { id: "2", title: "190 Clarence, London, Ontario, J2FGH2" },
+                  {
+                    id: "3",
+                    title:
+                      "4521 St. Paul Street, St Catharines, Ontario, L2S 3A1",
+                  },
+                  {
+                    id: "4",
+                    title: "2428 Rayborn Crescent, St Albert, Alberta, T8N 1C7",
+                  },
+                  {
+                    id: "5",
+                    title:
+                      "1030 rue de la Gauchetière, Montreal, Quebec, H3B 2M3",
+                  },
+                  {
+                    id: "6",
+                    title: "2511 Weir Crescent, Toronto, Ontario, M1E 3T8",
+                  },
+                ]}
+              />
+            </View>
 
             <Text style={styles.cates}>Contact Info</Text>
             <TextInput

@@ -111,10 +111,22 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderRadius: 4,
   },
+
   autocomplete: {
     borderColor: "transparent",
     height: 30,
     borderRadius: 6,
+  },
+
+  uploadDoc: {
+    height: 80,
+    width: 360,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    marginTop: 20,
+    marginBottom: 20,
   },
 });
 
