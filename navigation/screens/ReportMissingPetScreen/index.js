@@ -174,11 +174,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
             </View> */}
 
             <View style={styles.uploadDoc}>
-              <Text style={styles.cates}>
-                {/* Please upload the proof document here */}
-                UPLOAD THE PROOF DOCUMENT
-              </Text>
-              {/* <AntDesign name="cloudupload" size={46} color="darkgreen" /> */}
+              <Text style={styles.cates}>UPLOAD THE PROOF DOCUMENT</Text>
               <FontAwesome5
                 name="cloud-upload-alt"
                 size={48}
@@ -208,7 +204,6 @@ const ReportMissingPetScreen = ({ navigation }) => {
               cancelBtnText="Cancel"
               customStyles={{
                 dateIcon: {
-                  // display: "none",
                   position: "absolute",
                   left: 0,
                   top: 4,
