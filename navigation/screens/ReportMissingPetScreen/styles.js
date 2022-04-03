@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "700",
     color: Colors.colors.dark,
+    marginTop: 10,
   },
 
   btnContainer: {
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
     color: Colors.colors.light,
     fontWeight: "600",
     fontStyle: "italic",
+    paddingTop: 10,
   },
 
   noticeTxt: {
@@ -121,11 +123,15 @@ const styles = StyleSheet.create({
   uploadDoc: {
     height: 80,
     width: 360,
+    height: 160,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: "#055c13",
+    overflow: "hidden",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",
     alignItems: "center",
-    marginTop: 20,
     marginBottom: 20,
   },
 });

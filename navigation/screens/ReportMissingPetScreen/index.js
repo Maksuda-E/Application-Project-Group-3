@@ -9,6 +9,7 @@ import {
   ScrollView,
   Alert,
   LogBox,
+  Linking,
 } from "react-native";
 import { firestore } from "./../../../firebaseConfig";
 import ImageSelector from "../../../components/ImageSelector/ImageSelector";
@@ -18,7 +19,7 @@ import DatePicker from "react-native-datepicker";
 // import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import styles from "./styles";
 import * as FileSystem from "expo-file-system";
-// import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 LogBox.ignoreAllLogs();
@@ -156,6 +157,55 @@ const ReportMissingPetScreen = ({ navigation }) => {
                 .
               </Text>
             </View>
+            <Text style={{ color: "#055c13", fontSize: 16, width: "96%" }}>
+              Furthermore, if you want to post this message to other social
+              media:
+            </Text>
+            <View
+              style={{
+                width: "92%",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                marginBottom: 10,
+                marginTop: 5,
+              }}
+            >
+              <TouchableOpacity>
+                <FontAwesome
+                  style={{ marginRight: 10 }}
+                  name="facebook-square"
+                  size={36}
+                  color="#4267B2"
+                  onPress={() =>
+                    Linking.openURL("https://www.facebook.com/LostPetsOntario")
+                  }
+                />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <FontAwesome
+                  style={{ marginRight: 10, marginLeft: 10 }}
+                  name="twitter-square"
+                  size={36}
+                  color="#00acee"
+                  onPress={() =>
+                    Linking.openURL("https://twitter.com/ontmissingpets")
+                  }
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity>
+                <FontAwesome5
+                  style={{ marginLeft: 10 }}
+                  name="instagram-square"
+                  size={36}
+                  color="#E1306C"
+                  onPress={() =>
+                    Linking.openURL("https://www.instagram.com/lostpetsontario")
+                  }
+                />
+              </TouchableOpacity>
+            </View>
 
             <Text style={styles.cates}>YOUR PET'S PHOTO</Text>
             <View style={styles.imageContainer}>
@@ -165,22 +215,15 @@ const ReportMissingPetScreen = ({ navigation }) => {
               />
             </View>
 
-            {/* <Text style={styles.cates}>YOUR PHOTO WITH PET</Text>
-            <View style={styles.imageContainer}>
-              <ImageSelector
-                imageUri={image}
-                onChangeImage={(uri) => setImage(uri)}
-              />
-            </View> */}
-
+            <Text style={styles.cates}>UPLOAD THE PROOF DOCUMENT</Text>
             <View style={styles.uploadDoc}>
-              <Text style={styles.cates}>UPLOAD THE PROOF DOCUMENT</Text>
-              <FontAwesome5
-                name="cloud-upload-alt"
-                size={48}
-                color="darkgreen"
-                style={{ marginTop: 18 }}
-              />
+              <TouchableOpacity>
+                <FontAwesome5
+                  name="cloud-upload-alt"
+                  size={48}
+                  color="#055c13"
+                />
+              </TouchableOpacity>
             </View>
 
             <Text style={styles.cates}>Pet's Name</Text>
