@@ -28,7 +28,7 @@ DropDownPicker.setListMode("SCROLLVIEW");
 
 const ReportMissingPetScreen = ({ navigation }) => {
   const [petImage, setPetImage] = useState(null);
-  const [image, setImage] = useState(null);
+  // const [image, setImage] = useState(null);
   const [petName, setPetName] = useState("");
   const [dateLost, setDateLost] = useState("");
   const [species, setSpecies] = useState("");
@@ -88,6 +88,57 @@ const ReportMissingPetScreen = ({ navigation }) => {
     setGenderOpen(false);
   }, []);
 
+  async function uploadData() {
+    const petImageType = petImage.split(".").slice(-1)[0];
+    let fsRead = await FileSystem.readAsStringAsync(petImage, {
+      encoding: "base64",
+    });
+    const uploadPetImage = "data:image/" + petImageType + ";base64," + fsRead;
+
+    // const imageType = image.split(".").slice(-1)[0];
+    // fsRead = await FileSystem.readAsStringAsync(image, {
+    //   encoding: "base64",
+    // });
+    // const uploadImage = "data:image/" + imageType + ";base64," + fsRead;
+    firestore
+      .collection("reportLostPet")
+      .add({
+        petImage: uploadPetImage,
+        // image: uploadImage,
+        petName: petName,
+        dateLost: dateLost,
+        species: species,
+        gender: gender,
+        breed: breed,
+        isChip: isChip,
+        address: address,
+        contactName: contactName,
+        contactPhone: contactPhone,
+      })
+      .then(() => {
+        Alert.alert("Thanks for reporting! Hope you will find your pet soon.");
+        console.log("Data has been uploaded successfully!");
+      })
+      .catch(function (error) {
+        Alert.alert("Something went wrong!");
+        console.log("Error: ", error);
+      });
+
+    // remove the field's data
+    setPetImage(null);
+    // setImage(null);
+    setPetName("");
+    setDateLost("");
+    setSpecies(null);
+    setGender(null);
+    setBreed("");
+    setIsChip("");
+    setAddress("");
+    setContactName("");
+    setContactPhone("");
+    setIsUpload(false);
+  }
+
   // Pick a single file
   async function uploadDoc() {
     let result = await DocumentPicker.getDocumentAsync({});
@@ -113,57 +164,6 @@ const ReportMissingPetScreen = ({ navigation }) => {
       const snapshot = await ref.put(blob);
       blob.close();
     }
-  }
-
-  async function uploadData() {
-    const petImageType = petImage.split(".").slice(-1)[0];
-    let fsRead = await FileSystem.readAsStringAsync(petImage, {
-      encoding: "base64",
-    });
-    const uploadPetImage = "data:image/" + petImageType + ";base64," + fsRead;
-
-    const imageType = image.split(".").slice(-1)[0];
-    fsRead = await FileSystem.readAsStringAsync(image, {
-      encoding: "base64",
-    });
-    const uploadImage = "data:image/" + imageType + ";base64," + fsRead;
-    firestore
-      .collection("reportLostPet")
-      .add({
-        petImage: uploadPetImage,
-        image: uploadImage,
-        petName: petName,
-        dateLost: dateLost,
-        species: species,
-        gender: gender,
-        breed: breed,
-        isChip: isChip,
-        address: address,
-        contactName: contactName,
-        contactPhone: contactPhone,
-      })
-      .then(() => {
-        Alert.alert("Thanks for reporting! Hope you will find your pet soon.");
-        console.log("Data has been uploaded successfully!");
-      })
-      .catch(function (error) {
-        Alert.alert("Something went wrong!");
-        console.log("Error: ", error);
-      });
-
-    // remove the field's data
-    setPetImage(null);
-    setImage(null);
-    setPetName("");
-    setDateLost("");
-    setSpecies(null);
-    setGender(null);
-    setBreed("");
-    setIsChip("");
-    setAddress("");
-    setContactName("");
-    setContactPhone("");
-    setIsUpload(false);
   }
 
   return (
