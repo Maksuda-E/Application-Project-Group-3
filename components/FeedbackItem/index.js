@@ -11,8 +11,8 @@ const FeedbackItem = ({ feedback }) => {
     <View style={styles.feedbackItem}>
       <View>
       <Text style={styles.itemTitle}>{feedback.name}</Text>
-      <Text style={styles.itemTitle}>{feedback.rating}</Text>
-      <Text style={styles.itemTitle}>{feedback.message}</Text>
+      <Text style={styles.itemsubTitle}>{feedback.rating}</Text>
+      <Text style={styles.itemsubTitle}>{feedback.message}</Text>
       </View>
     </View>
   )

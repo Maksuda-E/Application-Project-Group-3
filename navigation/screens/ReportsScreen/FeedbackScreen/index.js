@@ -1,4 +1,4 @@
-import React, { useState, useCallback }  from "react";
+import React, { useState, useCallback, useEffect }  from "react";
 import { 
   View, 
   Text,
@@ -12,6 +12,7 @@ import { firestore } from "../../../../firebaseConfig";
 import DropDownPicker from "react-native-dropdown-picker";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import styles from './styles';
+import FeedbackItem from '../../../../components/FeedbackItem';
 
 const FeedbackScreen = ({ navigation }) => {
 
@@ -68,6 +69,45 @@ const FeedbackScreen = ({ navigation }) => {
         setRecommend(null);
         setMessage(null);
       }
+
+      let [feedbackList, setFeedbackList] = useState([]);
+
+      useEffect(() => {
+        const subscriber = async () => {
+          try {
+              let result = [];
+              // let data = await firestore.collection('missingPets').get();
+              let data = await firestore.collection('feedback').get();
+  
+                  data.forEach(e => {
+  
+                      // if (e.id) {
+                      //     result.push({
+                      //         id: e.id,
+                      //         type: e.data().type,
+                      //         breed: e.data().breed,
+                      //         description: e.data().description,
+                      //     });
+                      // }
+                      if (e.id) {
+                          result.push({
+                              id: e.id,
+                              name: e.data().name,
+                              rating: e.data().rating,
+                              message: e.data().message,
+                              
+                          });
+                      }
+                  })
+  
+                  setFeedbackList(result);
+              } catch (err) {
+                  console.log(err);
+              }
+          }
+          subscriber();
+      }, []);
+        
     
 
   return (
@@ -83,7 +123,7 @@ const FeedbackScreen = ({ navigation }) => {
            <Text style={styles.subtitle}>
             We'd appreciate your valuable feedback so that we can improve our app.
            </Text>
-           <Text style={styles.feedbackText} onPress={() => navigation.navigate("Feedback Reports")}> Click here to adopt a pet!</Text>
+           <Text onPress={() => navigation.navigate("Feedback List")}> Click here to see others feedback!</Text>
          
          </View>
          <View
@@ -167,6 +207,16 @@ const FeedbackScreen = ({ navigation }) => {
               </TouchableOpacity>
             </View>
            </View>
+           <View style = {styles.lineStyle} />
+           <View>
+                <Text style={styles.subTitle}>Others Feedback</Text>
+                <ScrollView>
+                    {
+                        feedbackList.map((feedback) =>
+                            <FeedbackItem key={feedback.id} feedback={feedback} />)
+                    }
+                </ScrollView>
+        </View>
          </View> 
       </ImageBackground>
    </ScrollView>

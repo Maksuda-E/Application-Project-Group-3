@@ -74,6 +74,21 @@ const styles = StyleSheet.create({
   feedbackText: {
     color: Colors.colors.theme,
   },
+  subTitle: {
+    fontSize: 24,
+    fontFamily: 'notoserif',
+    fontWeight: 'bold',
+    color: "black",
+    marginTop: 15,
+    marginVertical: 10
+    
+  },
+  lineStyle:{
+    borderWidth: 1,
+    borderColor:'black',
+    marginRight: 20,
+    
+}
  
 });
 
