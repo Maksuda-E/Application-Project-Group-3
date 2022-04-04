@@ -11,7 +11,7 @@ import {
   LogBox,
   Linking,
 } from "react-native";
-import { firestore } from "./../../../firebaseConfig";
+import { firestore, storage } from "./../../../firebaseConfig";
 import ImageSelector from "../../../components/ImageSelector/ImageSelector";
 import DropDownPicker from "react-native-dropdown-picker";
 import { AutocompleteDropdown } from "react-native-autocomplete-dropdown";
@@ -21,13 +21,14 @@ import styles from "./styles";
 import * as FileSystem from "expo-file-system";
 import { FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
+import * as DocumentPicker from "expo-document-picker";
 
 LogBox.ignoreAllLogs();
 DropDownPicker.setListMode("SCROLLVIEW");
 
 const ReportMissingPetScreen = ({ navigation }) => {
   const [petImage, setPetImage] = useState(null);
-  const [image, setImage] = useState(null);
+  // const [image, setImage] = useState(null);
   const [petName, setPetName] = useState("");
   const [dateLost, setDateLost] = useState("");
   const [species, setSpecies] = useState("");
@@ -37,6 +38,8 @@ const ReportMissingPetScreen = ({ navigation }) => {
   const [address, setAddress] = useState("");
   const [contactName, setContactName] = useState("");
   const [contactPhone, setContactPhone] = useState("");
+
+  const [isUpload, setIsUpload] = useState(false);
 
   //For gender dropdown box
   const [genderOpen, setGenderOpen] = useState(false);
@@ -92,16 +95,16 @@ const ReportMissingPetScreen = ({ navigation }) => {
     });
     const uploadPetImage = "data:image/" + petImageType + ";base64," + fsRead;
 
-    const imageType = image.split(".").slice(-1)[0];
-    fsRead = await FileSystem.readAsStringAsync(image, {
-      encoding: "base64",
-    });
-    const uploadImage = "data:image/" + imageType + ";base64," + fsRead;
+    // const imageType = image.split(".").slice(-1)[0];
+    // fsRead = await FileSystem.readAsStringAsync(image, {
+    //   encoding: "base64",
+    // });
+    // const uploadImage = "data:image/" + imageType + ";base64," + fsRead;
     firestore
       .collection("reportLostPet")
       .add({
         petImage: uploadPetImage,
-        image: uploadImage,
+        // image: uploadImage,
         petName: petName,
         dateLost: dateLost,
         species: species,
@@ -123,7 +126,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
 
     // remove the field's data
     setPetImage(null);
-    setImage(null);
+    // setImage(null);
     setPetName("");
     setDateLost("");
     setSpecies(null);
@@ -133,6 +136,34 @@ const ReportMissingPetScreen = ({ navigation }) => {
     setAddress("");
     setContactName("");
     setContactPhone("");
+    setIsUpload(false);
+  }
+
+  // Pick a single file
+  async function uploadDoc() {
+    let result = await DocumentPicker.getDocumentAsync({});
+
+    if (result.type === "success") {
+      console.log(result);
+      setIsUpload(true);
+
+      const blob = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          resolve(xhr.response);
+        };
+        xhr.onerror = function (e) {
+          console.log(e);
+          reject(new TypeError("Network request failed"));
+        };
+        xhr.responseType = "blob";
+        xhr.open("GET", result.uri, true);
+        xhr.send(null);
+      });
+      const ref = storage.ref().child(new Date().toISOString());
+      const snapshot = await ref.put(blob);
+      blob.close();
+    }
   }
 
   return (
@@ -219,7 +250,15 @@ const ReportMissingPetScreen = ({ navigation }) => {
             <View style={styles.uploadDoc}>
               <TouchableOpacity>
                 <FontAwesome5
+                  style={{ display: isUpload ? "none" : "flex" }}
                   name="cloud-upload-alt"
+                  size={48}
+                  color="#055c13"
+                  onPress={uploadDoc}
+                />
+                <FontAwesome5
+                  style={{ display: isUpload ? "flex" : "none" }}
+                  name="check-circle"
                   size={48}
                   color="#055c13"
                 />

@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
 
   uploadDoc: {
-    height: 80,
+    // height: 60,
     width: 360,
     height: 160,
     borderRadius: 10,
