@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     width: "98%",
   },
   subtitle:{
-    fontSize: 17,
+    fontSize: 14,
     color: "black",
     paddingTop: 30,
   },
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
   feedbackText: {
     color: Colors.colors.theme,
   },
+ 
 });
 
 export default styles;

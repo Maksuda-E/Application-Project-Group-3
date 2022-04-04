@@ -6,6 +6,7 @@ import HomeScreenNavigator from './CustomNavigation';
 import ProfileScreenNavigator from './ProfileNavigation';
 import ReportsNavigator from './ReportNavigation';
 import InfoScreen from './screens/InfoScreen';
+import FeedbackScreen from './screens/ReportsScreen/FeedbackScreen';
 import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import Colors from '../constants/Colors';
 import { StackActions } from '@react-navigation/native';
@@ -35,8 +36,13 @@ export default function MainContainer() {
               iconName = focused ? 'information-circle' : 'information-circle-outline';
               color = focused ? Colors.colors.theme : 'grey';
             }
+            else if (routename === 'Feedback') {
+              iconName = focused ? 'checkbox' : 'checkbox-outline';
+              color = focused ? Colors.colors.theme : 'grey';
+            }
 
             return <Ionicons name={iconName} size={size} color={color} />
+             
           },
           tabBarActiveTintColor: Colors.colors.theme,
           tabBarInactiveTintColor: 'grey',
@@ -46,6 +52,7 @@ export default function MainContainer() {
       <Tab.Screen name={'Reports'} component={ReportsNavigator} options={{ headerShown: false }} />
       <Tab.Screen name={'Profile'} component={ProfileScreenNavigator} options={{ headerShown: false }} />
       <Tab.Screen name={'Info'} component={InfoScreen} options={{ headerShown: false }} />
+      <Tab.Screen name={'Feedback'} component={FeedbackScreen} options={{ headerShown: false }} />
     </Tab.Navigator>
     
   )

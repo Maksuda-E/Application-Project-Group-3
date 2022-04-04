@@ -83,6 +83,7 @@ const FeedbackScreen = ({ navigation }) => {
            <Text style={styles.subtitle}>
             We'd appreciate your valuable feedback so that we can improve our app.
            </Text>
+           <Text style={styles.feedbackText} onPress={() => navigation.navigate("Feedback Reports")}> Click here to adopt a pet!</Text>
          
          </View>
          <View

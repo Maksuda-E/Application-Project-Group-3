@@ -7,6 +7,8 @@ import MissingPetDetails from './screens/ReportsScreen/MissingPetReports/Missing
 import FoundPetReports from './screens/ReportsScreen/FoundPetReports';
 import AdoptScreen from './screens/ReportsScreen/AdoptScreen';
 import AdoptForm from './screens/ReportsScreen/AdoptScreen/AdoptForm';
+import FeedbackReport from './screens/ReportsScreen/FeedbackReport';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +46,11 @@ const ReportsNavigator = () => {
         name="FoundPetReports"
         component={FoundPetReports}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Feedback Reports"
+        component={FeedbackReport}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   )

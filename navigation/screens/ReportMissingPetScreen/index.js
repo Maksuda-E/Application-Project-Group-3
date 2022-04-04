@@ -168,7 +168,7 @@ const ReportMissingPetScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView>
-      <ScrollView style={styles.container}>
+      <ScrollView>
         <ImageBackground
           blurRadius={10}
           source={require("../../../assets/data/images/background.jpg")}
