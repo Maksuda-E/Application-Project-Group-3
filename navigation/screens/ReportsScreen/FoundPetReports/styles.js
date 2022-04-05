@@ -46,6 +46,12 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginHorizontal: '5%',
   },
+  cates: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: Colors.colors.dark,
+    paddingLeft: 18
+  },
   buttonText: {
     color: 'white',
     fontSize: 18,
@@ -62,6 +68,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 4,
   },
+  dropdown: {
+    borderColor: "grey",
+    height: 40,
+    borderRadius: 6,
+  },
+  text:{
+    paddingLeft: 5,
+    paddingRight: 5,
+    paddingTop: 8
+  }
 });
 
 export default styles;

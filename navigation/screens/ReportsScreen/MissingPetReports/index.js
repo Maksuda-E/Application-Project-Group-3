@@ -124,6 +124,7 @@ const MissingPetReports = ({ navigation }) => {
               contactPhone: e.data().contactPhone,
               dateLost: e.data().dateLost,
               gender: e.data().gender,
+              isChip: e.data().isChip,
               image: e.data().image,
               petImage: e.data().petImage,
             });

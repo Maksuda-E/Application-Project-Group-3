@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     color: Colors.colors.dark,
     marginTop: 10,
   },
-
+  
   btnContainer: {
     display: "flex",
     marginTop: 15,
