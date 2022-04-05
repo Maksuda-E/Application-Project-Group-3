@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { 
-  View, 
-  Text,
-  TextInput,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  ScrollView,
+import {
+    View,
+    Text,
+    TextInput,
+    Image,
+    ImageBackground,
+    TouchableOpacity,
+    ScrollView, Alert,
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { auth, firestore } from '../../../firebaseConfig';
 
 import styles from './styles';
+import alert from "react-native-web/dist/exports/Alert";
 
 
 const ProfileScreen = ({navigation}) => {
@@ -49,6 +50,26 @@ const ProfileScreen = ({navigation}) => {
     .catch(error => alert(error.message))
 }
 
+    const handleDelete = () => {
+      console.log('111')
+        firestore.collection("users").doc(userId).delete()
+        auth.currentUser.delete().then(() => {
+            console.log('success')
+            navigation.replace("Login")
+        })
+            .catch(error => {
+                console.log(error)
+                Alert.alert('ERROR', error.message)
+                auth.signOut()
+                    .then(() => {
+                        navigation.replace("Login")
+                    })
+                    .catch(error => Alert.alert('ERROR', error.message))
+            })
+
+        console.log('222')
+    }
+
   return (
     <View>
     <ImageBackground source={ require('../../../assets/data/images/background.jpg') } style={styles.background} >
@@ -60,6 +81,12 @@ const ProfileScreen = ({navigation}) => {
         <TouchableOpacity style={styles.editprofile} activeOpacity={0.8} onPress={() => navigation.navigate("Edit Profile")}>
           <Text style={styles.buttonText}>Update Profile</Text>
         </TouchableOpacity>
+          <TouchableOpacity style={styles.editprofile} activeOpacity={0.8} onPress={() => navigation.navigate("ResetPassword")}>
+              <Text style={styles.buttonText}>Reset Password</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.delete} activeOpacity={0.8} onPress={handleDelete}>
+              <Text style={styles.buttonText}>Delete This User</Text>
+          </TouchableOpacity>
       </View>
       <ScrollView style={styles.container}> 
        <Text>{"\n"}{"\n"}</Text>

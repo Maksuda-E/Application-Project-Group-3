@@ -76,6 +76,10 @@ const Login = () => {
                   <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Registration')}>
                    <Text style={styles.buttonText}>CREATE ACCOUNT</Text>
                   </TouchableOpacity>
+                    <Text style={styles.Ortext}>OR</Text>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ResetPassword')}>
+                        <Text style={styles.buttonText}>RESET PASSWORD</Text>
+                    </TouchableOpacity>
                 </View>
            </View>
          </ImageBackground>
