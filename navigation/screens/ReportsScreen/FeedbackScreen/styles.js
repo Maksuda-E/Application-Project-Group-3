@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     textAlignVertical: 'top',
     fontSize: 16,
-    fontWeight: "700"
   },
   btnContainer: {
     display: "flex",

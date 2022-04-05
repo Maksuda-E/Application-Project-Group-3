@@ -56,7 +56,7 @@ const FeedbackScreen = ({ navigation }) => {
             name: name,
           })
           .then(() => {
-            Alert.alert("Thanks for reporting! Hope you will find your pet soon.");
+            Alert.alert("Thanks for your valuable feedback!");
             console.log("Data has been uploaded successfully!");
           })
           .catch(function (error) {
@@ -76,19 +76,10 @@ const FeedbackScreen = ({ navigation }) => {
         const subscriber = async () => {
           try {
               let result = [];
-              // let data = await firestore.collection('missingPets').get();
               let data = await firestore.collection('feedback').get();
   
                   data.forEach(e => {
   
-                      // if (e.id) {
-                      //     result.push({
-                      //         id: e.id,
-                      //         type: e.data().type,
-                      //         breed: e.data().breed,
-                      //         description: e.data().description,
-                      //     });
-                      // }
                       if (e.id) {
                           result.push({
                               id: e.id,
@@ -123,8 +114,6 @@ const FeedbackScreen = ({ navigation }) => {
            <Text style={styles.subtitle}>
             We'd appreciate your valuable feedback so that we can improve our app.
            </Text>
-           <Text onPress={() => navigation.navigate("Feedback List")}> Click here to see others feedback!</Text>
-         
          </View>
          <View
            style={{
