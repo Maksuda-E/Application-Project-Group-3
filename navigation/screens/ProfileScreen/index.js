@@ -51,10 +51,10 @@ const ProfileScreen = ({navigation}) => {
 }
 
     const handleDelete = () => {
-      console.log('111')
         firestore.collection("users").doc(userId).delete()
         auth.currentUser.delete().then(() => {
             console.log('success')
+            Alert.alert('SUCCESS', 'user has deleted')
             navigation.replace("Login")
         })
             .catch(error => {
@@ -67,7 +67,6 @@ const ProfileScreen = ({navigation}) => {
                     .catch(error => Alert.alert('ERROR', error.message))
             })
 
-        console.log('222')
     }
 
   return (

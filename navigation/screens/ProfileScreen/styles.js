@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     marginHorizontal: '5%',
   },
    signout:{
-    width: '25%',
+    width: '20%',
     height: '10%',
     justifyContent: 'center',
     alignItems: 'center',
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
    },
    editprofile:{
-    width: '25%',
+    width: '20%',
     height: '10%',
     justifyContent: 'center',
     alignItems: 'center',
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
    },
     delete:{
-        width: '25%',
+        width: '20%',
         height: '10%',
         justifyContent: 'center',
         alignItems: 'center',
