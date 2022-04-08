@@ -5,14 +5,20 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
+import { AdMobBanner } from 'expo-ads-admob';
 
 
 import styles from './styles';
 
+// Android banner: ca-app-pub-2558632039230134/4708121338
+
 const HomeScreen = ({ navigation }) => {
+  //const bannerAdId = "ca-app-pub-2558632039230134/4708121338";
+
   return (
     <View>
       <ImageBackground source={ require('../../../assets/data/images/background.jpg') } style={styles.background} >
+      
         <Text style={styles.title}>App Name</Text>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.lostButton} activeOpacity={0.8} onPress={() => navigation.navigate("ReportMissingPet")}>
@@ -22,7 +28,14 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.buttonText}>Found A Pet</Text>
           </TouchableOpacity>
         </View>
+
+        <AdMobBanner
+            bannerSize="banner"
+            adUnitID="ca-app-pub-2558632039230134/4708121338"
+            servePersonalizedAds = {false}
+        />
       </ImageBackground>
+      
     </View>
   )
 };
