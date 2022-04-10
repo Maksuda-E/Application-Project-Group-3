@@ -30,8 +30,9 @@ const HomeScreen = ({ navigation }) => {
         </View>
 
         <AdMobBanner
-            bannerSize="banner"
-            adUnitID="ca-app-pub-2558632039230134/4708121338"
+            style={styles.banner}
+            bannerSize="smartBannerPortrait"
+            adUnitID="ca-app-pub-3940256099942544/6300978111"
             servePersonalizedAds = {false}
         />
       </ImageBackground>

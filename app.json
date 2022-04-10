@@ -21,7 +21,7 @@
     },
     "android": {
       "config": {
-        "googleMobileAdsAppId": "ca-app-pub-2558632039230134~6641479091"
+        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~3347511713"
       },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",

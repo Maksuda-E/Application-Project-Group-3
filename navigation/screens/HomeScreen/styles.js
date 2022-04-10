@@ -41,6 +41,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 18,
+  }, 
+  banner: {
+    marginTop: 400,
+    justifyContent: "flex-end"
   }
 });
 
