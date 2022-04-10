@@ -13,6 +13,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Print from 'expo-print';
 import { shareAsync } from 'expo-sharing';
 import MapView, { Marker } from 'react-native-maps';
+import * as SMS from 'expo-sms';
 
 import styles from './styles';
 
@@ -89,6 +90,19 @@ const ReportItem = ({ pet }) => {
         await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
     }
 
+    const sendMessageWithSMS = async () => {
+      const isAvailable = await SMS.isAvailableAsync();
+      if (isAvailable) {
+        const { result } = await SMS.sendSMSAsync(
+          [pet.contactPhone],
+          ' '
+        );
+        console.log(result);
+      } else {
+        console.log("SMS is not available on this device");
+      }
+    }
+
   return (
     <View style={styles.petCareItem}>
       <View style={styles.leftContainer}>
@@ -119,6 +133,11 @@ const ReportItem = ({ pet }) => {
         <TouchableOpacity onPress={shareFile}>
           <View style={styles.icons}>
             <MaterialCommunityIcons color="#055c13" name="share" size={35} />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={sendMessageWithSMS}>
+          <View style={styles.icons}>
+            <MaterialCommunityIcons color="#055c13" name="email-outline" size={35} />
           </View>
         </TouchableOpacity>
       </View>

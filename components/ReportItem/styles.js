@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   iconsContainer: {
     flexDirection: "row",
     marginTop: 5,
-    marginLeft: 100
+    marginLeft: 50
   },
   icons: {
     marginHorizontal: 7
