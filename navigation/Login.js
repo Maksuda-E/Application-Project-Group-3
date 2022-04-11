@@ -51,7 +51,7 @@ const Login = () => {
         <View style={styles.container}>
         <ImageBackground source={ require('../assets/data/images/loginBack.png') } 
         style={styles.background}>
-        <Text style={styles.maintitle}>App Name</Text>
+        <Text style={styles.maintitle}>Pet Fetch</Text>
             <View style={styles.container1}>
               <View style={styles.inputContainer} >
             <TextInput

@@ -19,7 +19,7 @@ const HomeScreen = ({ navigation }) => {
     <View>
       <ImageBackground source={ require('../../../assets/data/images/background.jpg') } style={styles.background} >
       
-        <Text style={styles.title}>App Name</Text>
+        <Text style={styles.title}>Pet Fetch</Text>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.lostButton} activeOpacity={0.8} onPress={() => navigation.navigate("ReportMissingPet")}>
             <Text style={styles.buttonText}>Lost My Pet</Text>
