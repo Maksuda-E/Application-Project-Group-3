@@ -56,7 +56,7 @@ const MissingPetDetails = ({ navigation, route }) => {
         <View style={styles.bodyContainer}>
           <View>
             <Text style={styles.title}>{pet.petName}</Text>
-            <Image style={styles.image} source={{ uri: pet.image }} />
+            <Image style={styles.image} source={{ uri: pet.petImage }} />
 
             <Text style={styles.cates}>Species:</Text>
             <Text style={styles.info}>{pet.species}</Text>
